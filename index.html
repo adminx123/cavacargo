@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Quote Form</title> 
+    <title>Customer Quote Form</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,26 +46,24 @@
     <h1>Customer Quote Form</h1>
     <div class="container">
         <label for="standardFee">Standard Fee</label>
-        <select id="standardFee">
-            <option value="100">$100</option>
-            </select>
-            
-        <label for="transportationFee">Travel</label>
+        <input type="text" id="standardFee" value="100" data-display="$100" disabled>
+
+        <label for="transportationFee">Location</label>
         <select id="transportationFee">
-            <option value="Fairview">Fairview + $15</option>
-            <option value="Kerrisdale">Kerrisdale + $20</option>
-            <option value="Kitsilano">Kitsilano + $20</option>
-            <option value="Mount Pleasant">Mount Pleasant + $30</option>
-            <option value="Shaughnessy">Shaughnessy + $15</option>
-            <option value="Spanish Banks">Spanish Banks + $30</option>
-            <option value="UBC">UBC + $35</option>
+            <option value="Fairview">Fairview</option>
+            <option value="Kerrisdale">Kerrisdale</option>
+            <option value="Kitsilano">Kitsilano</option>
+            <option value="Mount Pleasant">Mount Pleasant</option>
+            <option value="Shaughnessy">Shaughnessy</option>
+            <option value="Spanish Banks">Spanish Banks</option>
+            <option value="UBC">UBC</option>
         </select>
 
         <label for="ventLength">Approximate Length of Venting</label>
         <select id="ventLength">
-            <option value="0-15">0-15 + $10</option>
-            <option value="16-25">16-25 + $20</option>
-            <option value="26-x">26 - X + $35</option>
+            <option value="0-15">0-15</option>
+            <option value="16-25">16-25</option>
+            <option value="26-x">26 - X</option>
         </select>
 
         <label for="ventLocation">Vent Location</label>
@@ -99,65 +97,84 @@
 
 
 
-        function calculateQuote() {
-            const standardFee = parseFloat(document.getElementById('standardFee').value);
-            const transportationFee = document.getElementById('transportationFee').value;
-            const ventLength = document.getElementById('ventLength').value;
-            const ventLocation = document.getElementById('ventLocation').value;
-            const damagedVenting = document.getElementById('damagedVenting').value;
-            const rodentInfestation = document.getElementById('RodentInfestation').value;
+       function calculateQuote() {
+    const standardFee = parseFloat(document.getElementById('standardFee').value);
+    const transportationFee = document.getElementById('transportationFee').value;
+    const ventLength = document.getElementById('ventLength').value;
+    const ventLocation = document.getElementById('ventLocation').value;
+    const damagedVenting = document.getElementById('damagedVenting').value;
+    const rodentInfestation = document.getElementById('RodentInfestation').value;
 
-            let quote = standardFee;
+    let quote = standardFee;
 
-            switch (transportationFee) {
-                case 'Fairview': quote += 15; break;
-                case 'Kerrisdale': quote += 20; break;
-                case 'Mount Pleasant': quote += 30; break;
-                case 'Shaughnessy': quote += 15; break;
-                case 'Kitsilano': quote += 20; break;
-                case 'Spanish Banks': quote += 30; break;
-                case 'UBC': quote += 35; break;
-            }
+    switch (transportationFee) {
+        case 'Fairview': quote += 15; break;
+        case 'Kerrisdale': quote += 20; break;
+        case 'Mount Pleasant': quote += 30; break;
+        case 'Shaughnessy': quote += 15; break;
+        case 'Kitsilano': quote += 20; break;
+        case 'Spanish Banks': quote += 30; break;
+        case 'UBC': quote += 35; break;
+    }
 
-            switch (ventLength) {
-                case '0-15': quote += 10; break;
-                case '16-25': quote += 20; break;
-                case '26-x': quote += 35; break;
-            }
+    switch (ventLength) {
+        case '0-15': quote += 10; break;
+        case '16-25': quote += 20; break;
+        case '26-x': quote += 30; break;
+    }
 
-            switch (ventLocation) {
-                // Replace 'x' wth the appropriate amount or logic for roof venting
-                case 'roof': quote += x; break;
-                case 'groundLevel': quote += 0; break;
-                case 'ladderAccessible': quote += 20; break;
-            }
+    switch (ventLocation) {
+        case 'roof': quote += x; break; // Replace 'x' with appropriate logic for roof venting
+        case 'groundLevel': quote += 0; break;
+        case 'ladderAccessible': quote += 20; break;
+    }
 
-            // No change to quote for "unsure"
-            switch (damagedVenting) {
-                case 'EVC':
-                case 'MVT':
-                case 'FH':
-                case 'ventUnsure':
-                    quote += 0;
-                    break;
-            }
+    switch (damagedVenting) {
+        case 'EVC':
+        case 'MVT':
+        case 'FH':
+        case 'ventUnsure':
+            quote += 0;
+            break;
+    }
 
-            // Adding rodent infestation fee
-            switch (rodentInfestation) {
-                case 'rodentYes': quote += 25; break;
-                case 'rodentUnsure': quote += 0; break;
-            }
+    switch (rodentInfestation) {
+        case 'rodentYes': quote += 25; break;
+        case 'rodentUnsure': quote += 0; break;
+    }
 
-            document.getElementById('quoteResult').innerText = 'Estimated Quote: $' + quote.toFixed(2);
+    // Display the estimated quote
+    document.getElementById('quoteResult').innerText = 'Estimated Quote: $' + quote.toFixed(2);
 
-          // Update the note based on damaged venting and rodent infestation status
-document.getElementById('note').innerText =
-    'Note: ' +
-    (damagedVenting === 'ventUnsure' ? 'Damage Inspection Needed' : '') +
-    (damagedVenting === 'ventUnsure' && rodentInfestation === 'rodentUnsure' ? ' and ' : '') +
-    (rodentInfestation === 'rodentUnsure' ? 'Rodent Inspection Needed' : '');
+    // Update the note based on damaged venting and rodent infestation status
+    document.getElementById('note').innerText =
+        'Note: ' +
+        (damagedVenting === 'ventUnsure' ? 'Damage Inspection Needed' : '') +
+        (damagedVenting === 'ventUnsure' && rodentInfestation === 'rodentUnsure' ? ' and ' : '') +
+        (rodentInfestation === 'rodentUnsure' ? 'Rodent Inspection Needed' : '');
 
-        }
+    // Prepare email subject and body
+    const emailSubject = encodeURIComponent('Customer Quote Request');
+    const emailBody = encodeURIComponent(`
+        Quoted Price: $${quote.toFixed(2)}
+
+        Transportation Fee: ${transportationFee}
+        Vent Length: ${ventLength}
+        Vent Location: ${ventLocation}
+        Damaged Venting: ${damagedVenting}
+        Rodent Infestation: ${rodentInfestation}
+
+        Address:
+        Phone Number:
+    `);
+
+    // Construct the mailto link
+    const mailtoLink = `mailto:recipient@example.com?subject=${emailSubject}&body=${emailBody}`;
+
+    // Open the default email client
+    window.open(mailtoLink);
+}
+
     </script>
 
 </body>
