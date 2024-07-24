@@ -48,8 +48,8 @@
         <label for="standardFee">Standard Fee</label>
         <input type="text" id="standardFee" value="100" data-display="$100" disabled>
 
-        <label for="transportationFee">Location</label>
-        <select id="transportationFee">
+        <label for="serviceLocation">Location</label>
+        <select id="serviceLocation">
             <option value="Fairview">Fairview</option>
             <option value="Kerrisdale">Kerrisdale</option>
             <option value="Kitsilano">Kitsilano</option>
@@ -99,7 +99,7 @@
 
        function calculateQuote() {
     const standardFee = parseFloat(document.getElementById('standardFee').value);
-    const transportationFee = document.getElementById('transportationFee').value;
+    const serviceLocation = document.getElementById('serviceLocation').value;
     const ventLength = document.getElementById('ventLength').value;
     const ventLocation = document.getElementById('ventLocation').value;
     const damagedVenting = document.getElementById('damagedVenting').value;
@@ -156,20 +156,22 @@
     // Prepare email subject and body
     const emailSubject = encodeURIComponent('Customer Quote Request');
     const emailBody = encodeURIComponent(`
-        Quoted Price: $${quote.toFixed(2)}
-
-        Transportation Fee: ${transportationFee}
+        
+        Phone Number:
+        Service Area: ${serviceLocation}
+        Service Address:
         Vent Length: ${ventLength}
         Vent Location: ${ventLocation}
         Damaged Venting: ${damagedVenting}
         Rodent Infestation: ${rodentInfestation}
 
-        Address:
-        Phone Number:
+        Quoted Price: $${quote.toFixed(2)}
+
+        
     `);
 
     // Construct the mailto link
-    const mailtoLink = `mailto:recipient@example.com?subject=${emailSubject}&body=${emailBody}`;
+    const mailtoLink = `mailto:admin@cavacargo.com?subject=${emailSubject}&body=${emailBody}`;
 
     // Open the default email client
     window.open(mailtoLink);
