@@ -45,8 +45,11 @@
 
     <h1>Customer Quote Form</h1>
     <div class="container">
-        <label for="standardFee">Standard Fee</label>
-        <input type="text" id="standardFee" value="100" data-display="$100" disabled>
+        <label>Standard Fee</label>
+        <select id= "standardFee">
+         <option value="100">$100</option>
+        </select>
+        
 
         <label for="serviceLocation">Location</label>
         <select id="serviceLocation">
@@ -61,9 +64,9 @@
 
         <label for="ventLength">Approximate Length of Venting</label>
         <select id="ventLength">
-            <option value="0-15">0-15</option>
-            <option value="16-25">16-25</option>
-            <option value="26-x">26 - X</option>
+            <option value="0-15 ft">0-15</option>
+            <option value="16-25 ft">16-25</option>
+            <option value="26-x ft">26 - X</option>
         </select>
 
         <label for="ventLocation">Vent Location</label>
@@ -75,16 +78,16 @@
 
         <label for="damagedVenting">Damaged Venting</label>
         <select id="damagedVenting" onchange="updateVentStatus()">
+            <option value="ventUnsure">No/Unsure + $0-TBD</option>
             <option value="FH">Replacement Flexible Hose + $30</option>
             <option value="MVT">Minor Vent Taping + $0</option>
             <option value="EVC">Exterior Vent Cover + $25</option>
-            <option value="ventUnsure">No/Unsure + $0-TBD</option>
-        </select>
+                    </select>
 
         <label for="RodentInfestation">Rodent Infestation</label>
         <select id="RodentInfestation">
-            <option value="rodentYes">Yes + $25</option>
-            <option value="rodentUnsure">No/Unsure + $0-25</option>
+                        <option value="rodentUnsure">No/Unsure + $0-25</option>
+                        <option value="rodentYes">Yes + $25</option>
         </select>
 
         <button onclick="calculateQuote()">Calculate Quote</button>
@@ -139,8 +142,9 @@
     }
 
     switch (rodentInfestation) {
+             case 'rodentUnsure': quote += 0; break;
         case 'rodentYes': quote += 25; break;
-        case 'rodentUnsure': quote += 0; break;
+   
     }
 
     // Display the estimated quote
@@ -156,7 +160,15 @@
     // Prepare email subject and body
     const emailSubject = encodeURIComponent('Service Request');
     const emailBody = encodeURIComponent(`
-        
+
+        Cavacargo
+        Phone: xxx-xxx-xxxx
+        Email: admin@cavacargo.com
+
+
+        Please complete any information missing below.
+
+        Name:
         Phone Number:
         Service Area: ${serviceLocation}
         Service Address:
