@@ -107,7 +107,7 @@
 
     let quote = standardFee;
 
-    switch (transportationFee) {
+    switch (serviceLocation) {
         case 'Fairview': quote += 15; break;
         case 'Kerrisdale': quote += 20; break;
         case 'Mount Pleasant': quote += 30; break;
@@ -154,7 +154,7 @@
         (rodentInfestation === 'rodentUnsure' ? 'Rodent Inspection Needed' : '');
 
     // Prepare email subject and body
-    const emailSubject = encodeURIComponent('Customer Quote Request');
+    const emailSubject = encodeURIComponent('Service Request');
     const emailBody = encodeURIComponent(`
         
         Phone Number:
