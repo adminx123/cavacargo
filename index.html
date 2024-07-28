@@ -43,157 +43,210 @@
 </head>
 <body>
 
-<h1 style= font-size:14px;>Cavacargo</h1>
-<h1 style= font-size:14px;>xxx-xxx-xxxx</h1>
-<h1 style= font-size:14px;>admin@cavacargo.com</h1>
+<h1 style="font-size:14px;">Cavacargo</h1>
+<h1 style="font-size:14px;">xxx-xxx-xxxx</h1>
+<h1 style="font-size:14px;">admin@cavacargo.com</h1>
 
-    <h1 style= "font-size:24px; text-align:center;">Customer Quote Form </h1>
-    <div class="container">
-        <label>Standard Fee</label>
-        <select id= "standardFee">
-         <option value="100">$100</option>
-        </select>
+<h1 style="font-size:24px; text-align:center;">Customer Quote Form </h1>
+<div class="container">
+    <label>Standard Fee</label>
+    <select id="standardFee" onchange="calculateQuote()">
+        <option value="100">$100</option>
+    </select>
+    
+    <label for="serviceLocation">Location</label>
+    <select id="serviceLocation" onchange="calculateQuote()">
+        <option value="Fairview">Fairview</option>
+        <option value="Kerrisdale">Kerrisdale</option>
+        <option value="Kitsilano">Kitsilano</option>
+        <option value="Mount Pleasant">Mount Pleasant</option>
+        <option value="Shaughnessy">Shaughnessy</option>
+        <option value="Spanish Banks">Spanish Banks</option>
+        <option value="UBC">UBC</option>
+    </select>
+
+    <label for="ventLength">Approximate Length of Venting</label>
+    <select id="ventLength" onchange="calculateQuote()">
+        <option value="0-15 ft">0-15</option>
+        <option value="16-25 ft">16-25</option>
+        <option value="26-x ft">26 - X</option>
+    </select>
+
+    <label for="ventLocation">Vent Location</label>
+    <select id="ventLocation" onchange="calculateQuote()">
+        <option value="groundLevel">Ground Level</option>
+        <option value="roof">Roof *Sorry we are unable to service roof vents at this time.</option>
+        <option value="ladderAccessible">Ladder Accessible + $20</option>
+    </select>
+    
+    <label for="ventQTY">Vents</label>
+    <select id="ventQTY" onchange="calculateQuote()">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+
+    <label for="damagedVenting">Damaged Venting</label>
+    <select id="damagedVenting" onchange="calculateQuote()">
+        <option value="ventUnsure">No/Unsure + $0-TBD</option>
+        <option value="FH">Replacement Flexible Hose + $30</option>
+        <option value="MVT">Minor Vent Taping + $0</option>
+        <option value="EVC">Exterior Vent Cover + $25</option>
+    </select>
+
+    <label for="RodentInfestation">Rodent Infestation</label>
+    <select id="RodentInfestation" onchange="calculateQuote()">
+        <option value="rodentUnsure">No/Unsure + $0-25</option>
+        <option value="rodentYes">Yes + $25</option>
+    </select>
+
+    <button id="sendEmail">Send Quote via Email</button>
+    <p id="quoteResult"></p>
+    <p id="note"></p>
+</div>
+
+<script>
+    function calculateQuote() {
+        const standardFee = parseFloat(document.getElementById('standardFee').value);
+        const serviceLocation = document.getElementById('serviceLocation').value;
+        const ventLength = document.getElementById('ventLength').value;
+        const ventLocation = document.getElementById('ventLocation').value;
+        const ventQTY = document.getElementById('ventQTY').value;
+        const damagedVenting = document.getElementById('damagedVenting').value;
+        const rodentInfestation = document.getElementById('RodentInfestation').value;
+
+        let quote = standardFee;
+
+        switch (serviceLocation) {
+            case 'Fairview': quote += 15; break;
+            case 'Kerrisdale': quote += 20; break;
+            case 'Mount Pleasant': quote += 30; break;
+            case 'Shaughnessy': quote += 15; break;
+            case 'Kitsilano': quote += 20; break;
+            case 'Spanish Banks': quote += 30; break;
+            case 'UBC': quote += 35; break;
+        }
+
+        switch (ventLength) {
+            case '0-15 ft': quote += 10; break;
+            case '16-25 ft': quote += 20; break;
+            case '26-x ft': quote += 30; break;
+        }
+
+        switch (ventLocation) {
+            case 'roof': quote += 0; break; // Adjust if necessary
+            case 'groundLevel': quote += 0; break;
+            case 'ladderAccessible': quote += 20; break;
+        }
         
+        switch (ventQTY) {
+            case '1': quote += 10; break;
+            case '2': quote += 20; break;
+            case '3': quote += 30; break;
+        }
 
-        <label for="serviceLocation">Location</label>
-        <select id="serviceLocation">
-            <option value="Fairview">Fairview</option>
-            <option value="Kerrisdale">Kerrisdale</option>
-            <option value="Kitsilano">Kitsilano</option>
-            <option value="Mount Pleasant">Mount Pleasant</option>
-            <option value="Shaughnessy">Shaughnessy</option>
-            <option value="Spanish Banks">Spanish Banks</option>
-            <option value="UBC">UBC</option>
-        </select>
+        switch (damagedVenting) {
+            case 'EVC': quote += 25; break;
+            case 'FH': quote += 30; break;
+            case 'MVT': quote += 0; break;
+            case 'ventUnsure': quote += 0; break;
+        }
 
-        <label for="ventLength">Approximate Length of Venting</label>
-        <select id="ventLength">
-            <option value="0-15 ft">0-15</option>
-            <option value="16-25 ft">16-25</option>
-            <option value="26-x ft">26 - X</option>
-        </select>
+        switch (rodentInfestation) {
+            case 'rodentUnsure': quote += 0; break;
+            case 'rodentYes': quote += 25; break;
+        }
 
-        <label for="ventLocation">Vent Location</label>
-        <select id="ventLocation">
-            <option value="groundLevel">Ground Level</option>
-            <option value="roof">Roof *Sorry we are unable to service roof vents at this time.</option>
-            <option value="ladderAccessible">Ladder Accessible + $20</option>
-        </select>
+        // Display the estimated quote
+        document.getElementById('quoteResult').innerText = 'Estimated Quote: $' + quote.toFixed(2);
 
-        <label for="damagedVenting">Damaged Venting</label>
-        <select id="damagedVenting" onchange="updateVentStatus()">
-            <option value="ventUnsure">No/Unsure + $0-TBD</option>
-            <option value="FH">Replacement Flexible Hose + $30</option>
-            <option value="MVT">Minor Vent Taping + $0</option>
-            <option value="EVC">Exterior Vent Cover + $25</option>
-                    </select>
+        // Update the note based on damaged venting and rodent infestation status
+        document.getElementById('note').innerText =
+            'Note: ' +
+            (damagedVenting === 'ventUnsure' ? 'Damage Inspection Needed' : '') +
+            (damagedVenting === 'ventUnsure' && rodentInfestation === 'rodentUnsure' ? ' and ' : '') +
+            (rodentInfestation === 'rodentUnsure' ? 'Rodent Inspection Needed' : '');
+    }
 
-        <label for="RodentInfestation">Rodent Infestation</label>
-        <select id="RodentInfestation">
-                        <option value="rodentUnsure">No/Unsure + $0-25</option>
-                        <option value="rodentYes">Yes + $25</option>
-        </select>
+    document.getElementById('sendEmail').addEventListener('click', () => {
+        const standardFee = parseFloat(document.getElementById('standardFee').value);
+        const serviceLocation = document.getElementById('serviceLocation').value;
+        const ventLength = document.getElementById('ventLength').value;
+        const ventLocation = document.getElementById('ventLocation').value;
+        const ventQTY = document.getElementById('ventQTY').value;
+        const damagedVenting = document.getElementById('damagedVenting').value;
+        const rodentInfestation = document.getElementById('RodentInfestation').value;
 
-        <button onclick="calculateQuote()">Calculate Quote</button>
-        <p id="quoteResult"></p>
-        <p id="note"></p>
-    </div>
+        let quote = standardFee;
 
-    <script>
+        switch (serviceLocation) {
+            case 'Fairview': quote += 15; break;
+            case 'Kerrisdale': quote += 20; break;
+            case 'Mount Pleasant': quote += 30; break;
+            case 'Shaughnessy': quote += 15; break;
+            case 'Kitsilano': quote += 20; break;
+            case 'Spanish Banks': quote += 30; break;
+            case 'UBC': quote += 35; break;
+        }
+
+        switch (ventLength) {
+            case '0-15 ft': quote += 10; break;
+            case '16-25 ft': quote += 20; break;
+            case '26-x ft': quote += 30; break;
+        }
+
+        switch (ventLocation) {
+            case 'roof': quote += 0; break; // Adjust if necessary
+            case 'groundLevel': quote += 0; break;
+            case 'ladderAccessible': quote += 20; break;
+        }
         
+        switch (ventQTY) {
+            case '1': quote += 10; break;
+            case '2': quote += 20; break;
+            case '3': quote += 30; break;
+        }
 
+        switch (damagedVenting) {
+            case 'EVC': quote += 25; break;
+            case 'FH': quote += 30; break;
+            case 'MVT': quote += 0; break;
+            case 'ventUnsure': quote += 0; break;
+        }
 
+        switch (rodentInfestation) {
+            case 'rodentUnsure': quote += 0; break;
+            case 'rodentYes': quote += 25; break;
+        }
 
-       function calculateQuote() {
-    const standardFee = parseFloat(document.getElementById('standardFee').value);
-    const serviceLocation = document.getElementById('serviceLocation').value;
-    const ventLength = document.getElementById('ventLength').value;
-    const ventLocation = document.getElementById('ventLocation').value;
-    const damagedVenting = document.getElementById('damagedVenting').value;
-    const rodentInfestation = document.getElementById('RodentInfestation').value;
+        // Prepare email subject and body
+        const emailSubject = encodeURIComponent('Service Request');
+        const emailBody = encodeURIComponent(`
+            Cavacargo
+            Phone: xxx-xxx-xxxx
+            Email: admin@cavacargo.com
 
-    let quote = standardFee;
+            Please complete any information missing below.
 
-    switch (serviceLocation) {
-        case 'Fairview': quote += 15; break;
-        case 'Kerrisdale': quote += 20; break;
-        case 'Mount Pleasant': quote += 30; break;
-        case 'Shaughnessy': quote += 15; break;
-        case 'Kitsilano': quote += 20; break;
-        case 'Spanish Banks': quote += 30; break;
-        case 'UBC': quote += 35; break;
-    }
+            Name:
+            Phone Number:
+            Service Area: ${serviceLocation}
+            Service Address:
+            Vent Length: ${ventLength}
+            Vent Location: ${ventLocation}
+            Damaged Venting: ${damagedVenting}
+            Rodent Infestation: ${rodentInfestation}
 
-    switch (ventLength) {
-        case '0-15': quote += 10; break;
-        case '16-25': quote += 20; break;
-        case '26-x': quote += 30; break;
-    }
+            Quoted Price: $${quote.toFixed(2)}
+        `);
 
-    switch (ventLocation) {
-        case 'roof': quote += x; break; // Replace 'x' with appropriate logic for roof venting
-        case 'groundLevel': quote += 0; break;
-        case 'ladderAccessible': quote += 20; break;
-    }
+        // Construct the mailto link
+        const mailtoLink = `mailto:admin@cavacargo.com?subject=${emailSubject}&body=${emailBody}`;
 
-    switch (damagedVenting) {
-        case 'EVC':
-        case 'MVT':
-        case 'FH':
-        case 'ventUnsure':
-            quote += 0;
-            break;
-    }
-
-    switch (rodentInfestation) {
-             case 'rodentUnsure': quote += 0; break;
-        case 'rodentYes': quote += 25; break;
-   
-    }
-
-    // Display the estimated quote
-    document.getElementById('quoteResult').innerText = 'Estimated Quote: $' + quote.toFixed(2);
-
-    // Update the note based on damaged venting and rodent infestation status
-    document.getElementById('note').innerText =
-        'Note: ' +
-        (damagedVenting === 'ventUnsure' ? 'Damage Inspection Needed' : '') +
-        (damagedVenting === 'ventUnsure' && rodentInfestation === 'rodentUnsure' ? ' and ' : '') +
-        (rodentInfestation === 'rodentUnsure' ? 'Rodent Inspection Needed' : '');
-
-    // Prepare email subject and body
-    const emailSubject = encodeURIComponent('Service Request');
-    const emailBody = encodeURIComponent(`
-
-        Cavacargo
-        Phone: xxx-xxx-xxxx
-        Email: admin@cavacargo.com
-
-
-        Please complete any information missing below.
-
-        Name:
-        Phone Number:
-        Service Area: ${serviceLocation}
-        Service Address:
-        Vent Length: ${ventLength}
-        Vent Location: ${ventLocation}
-        Damaged Venting: ${damagedVenting}
-        Rodent Infestation: ${rodentInfestation}
-
-        Quoted Price: $${quote.toFixed(2)}
-
-        
-    `);
-
-    // Construct the mailto link
-    const mailtoLink = `mailto:admin@cavacargo.com?subject=${emailSubject}&body=${emailBody}`;
-
-    // Open the default email client
-    window.open(mailtoLink);
-}
-
-    </script>
+        // Open the default email client
+        window.open(mailtoLink);
+    });
+</script>
 
 </body>
 </html>
