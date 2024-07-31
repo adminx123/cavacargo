@@ -86,6 +86,14 @@
         <option value="3">3</option>
     </select>
 
+  <label for="ventElbow">Vent Elbows</label>
+    <select id="ventElbow" onchange="calculateQuote()">
+         <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+
     <label for="damagedVenting">Vent Damage</label>
     <select id="damagedVenting" onchange="calculateQuote()">
         <option value="ventUnsure">No/Unsure + $0-TBD</option>
@@ -112,6 +120,7 @@
         const ventLength = document.getElementById('ventLength').value;
         const ventLocation = document.getElementById('ventLocation').value;
         const ventQTY = document.getElementById('ventQTY').value;
+        const ventElbow = document.getElementById('ventElbow').value;
         const damagedVenting = document.getElementById('damagedVenting').value;
         const rodentInfestation = document.getElementById('RodentInfestation').value;
 
@@ -140,6 +149,13 @@
         }
         
         switch (ventQTY) {
+            case '1': quote += 10; break;
+            case '2': quote += 20; break;
+            case '3': quote += 30; break;
+        }
+        
+        switch (ventElbow) {
+            case '0': quote += 0; break;
             case '1': quote += 10; break;
             case '2': quote += 20; break;
             case '3': quote += 30; break;
@@ -174,8 +190,11 @@
         const ventLength = document.getElementById('ventLength').value;
         const ventLocation = document.getElementById('ventLocation').value;
         const ventQTY = document.getElementById('ventQTY').value;
+        const ventElbow = document.getElementById('ventElbow').value;
         const damagedVenting = document.getElementById('damagedVenting').value;
         const rodentInfestation = document.getElementById('RodentInfestation').value;
+
+        let quote = standardFee;
 
         let quote = standardFee;
 
@@ -202,6 +221,13 @@
         }
         
         switch (ventQTY) {
+            case '1': quote += 10; break;
+            case '2': quote += 20; break;
+            case '3': quote += 30; break;
+        }
+        
+        switch (ventElbow) {
+            case '0': quote += 0; break;
             case '1': quote += 10; break;
             case '2': quote += 20; break;
             case '3': quote += 30; break;
@@ -233,6 +259,8 @@
             Service Area: ${serviceLocation}
             Service Address:
             Vent Length: ${ventLength}
+            Vent Quantity: ${ventQTY}
+            Vent Elbows: ${ventElbow}
             Vent Location: ${ventLocation}
             Damaged Venting: ${damagedVenting}
             Rodent Infestation: ${rodentInfestation}
