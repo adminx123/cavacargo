@@ -67,7 +67,8 @@
 
     <label for="ventLength">Vent Length</label>
     <select id="ventLength" onchange="calculateQuote()">
-        <option value="0-15">0-15ft/Unsure</option>
+        <option value="x">Unsure</option>
+        <option value="0-15">0-15ft</option>
         <option value="16-25">16-25ft</option>
         <option value="26-xx">26-xxft</option>
     </select>
@@ -88,7 +89,8 @@
 
     <label for="ventElbow">Vent Elbows</label>
     <select id="ventElbow" onchange="calculateQuote()">
-        <option value="0">0/Unsure</option>
+        <option value="x">Unsure</option>
+        <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -96,16 +98,18 @@
 
     <label for="damagedVenting">Vent Damage</label>
     <select id="damagedVenting" onchange="calculateQuote()">
-        <option value="ventUnsure">No/Unsure + $0-TBD</option>
-        <option value="FH">Replacement Flexible Hose + $30</option>
-        <option value="MVT">Minor Vent Taping + $0</option>
-        <option value="EVC">Exterior Vent Cover + $25</option>
+         <option value="Unsure">Unsure + $0-TBD</option>
+        <option value="ventUnsure">No</option>
+        <option value="FH">Replacement Flexible Hose</option>
+        <option value="MVT">Minor Vent Taping</option>
+        <option value="EVC">Exterior Vent Cover</option>
     </select>
 
     <label for="RodentInfestation">Rodent Infestation</label>
     <select id="RodentInfestation" onchange="calculateQuote()">
-        <option value="rodentUnsure">No/Unsure + $0-25</option>
-        <option value="rodentYes">Yes + $25</option>
+        <option value="rodentUnsure">Unsure</option>
+        <option value="rodentNo">No</option>
+        <option value="rodentYes">Yes</option>
     </select>
 
 <button id="calculateEstimate">Calculate Estimate</button>
@@ -140,6 +144,7 @@
     }
 
     switch (ventLength) {
+        case 'x': quote += 0; break;
         case '0-15': quote += 10; break;
         case '16-25': quote += 20; break;
         case '26-xx': quote += 30; break;
@@ -158,6 +163,7 @@
     }
     
     switch (ventElbow) {
+        case 'x': quote += 0; break;
         case '0': quote += 0; break;
         case '1': quote += 10; break;
         case '2': quote += 20; break;
@@ -165,6 +171,7 @@
     }
 
     switch (damagedVenting) {
+         case 'Unsure': quote += 0; break;
         case 'EVC': quote += 25; break;
         case 'FH': quote += 30; break;
         case 'MVT': quote += 0; break;
@@ -173,6 +180,7 @@
 
     switch (rodentInfestation) {
         case 'rodentUnsure': quote += 0; break;
+        case 'rodentNo': quote += 0; break;
         case 'rodentYes': quote += 25; break;
     }
 
