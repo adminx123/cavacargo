@@ -67,9 +67,9 @@
 
     <label for="ventLength">Vent Length</label>
     <select id="ventLength" onchange="calculateQuote()">
-        <option value="0-15 ft">0-15</option>
-        <option value="16-25 ft">16-25</option>
-        <option value="26-x ft">26 - X</option>
+        <option value="0-15">0-15ft/Unsure</option>
+        <option value="16-25">16-25ft</option>
+        <option value="26-xx">26-xxft</option>
     </select>
 
     <label for="ventLocation">Vent Location</label>
@@ -88,7 +88,7 @@
 
     <label for="ventElbow">Vent Elbows</label>
     <select id="ventElbow" onchange="calculateQuote()">
-        <option value="0">0</option>
+        <option value="0">0/Unsure</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -140,9 +140,9 @@
     }
 
     switch (ventLength) {
-        case '0-15 ft': quote += 10; break;
-        case '16-25 ft': quote += 20; break;
-        case '26-x ft': quote += 30; break;
+        case '0-15': quote += 10; break;
+        case '16-25': quote += 20; break;
+        case '26-xx': quote += 30; break;
     }
 
     switch (ventLocation) {
