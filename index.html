@@ -125,6 +125,18 @@
 <button id="calculateEstimate">Calculate Estimate</button>
 
 
+<label for="Address">Address</label>
+<input id ="Address">
+<label for="Phone">Phone</label>
+<input id = "Phone">
+<label for="VisitTime">Time of Day Service</label>
+    <select id="VisitTime" onchange="calculateQuote()">
+        <option value="8-11">8-11</option>
+        <option value="11-1">11-1</option>
+        <option value="1-3">1-3</option>
+         <option value="3-6">3-6</option>
+    </select>
+
     <button id="sendEmail">Request Quote</button>
     <p id="quoteResult"></p>
     <p id="note"></p>
