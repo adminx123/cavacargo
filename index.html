@@ -152,7 +152,9 @@
     const ventElbow = document.getElementById('ventElbow').value;
     const damagedVenting = document.getElementById('damagedVenting').value;
     const rodentInfestation = document.getElementById('RodentInfestation').value;
-
+   const Address = document.getElementById('Address').value; 
+    const Phone = document.getElementById('Phone').value; 
+    
     let quote = standardFee;
 
     switch (serviceLocation) {
@@ -243,9 +245,9 @@ document.getElementById('sendEmail').addEventListener('click', () => {
         Please complete any information missing below.
 
         Name:
-        Phone Number:
+        Phone Number: ${result.Phone}
         Service Area: ${result.serviceLocation}
-        Service Address:
+        Service Address:${result.Address}
         Vent Length: ${result.ventLength}
         Vent Quantity: ${result.ventQTY}
         Vent Elbows: ${result.ventElbow}
