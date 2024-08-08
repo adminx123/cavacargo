@@ -129,6 +129,9 @@
 <input id ="Address">
 <label for="Phone">Phone</label>
 <input id = "Phone">
+<label for="Name">Name</label>
+<input id = "Name">
+
 <label for="VisitTime">Time of Day Service</label>
     <select id="VisitTime" onchange="calculateQuote()">
         <option value="8-11">8-11</option>
@@ -154,6 +157,10 @@
     const rodentInfestation = document.getElementById('RodentInfestation').value;
    const Address = document.getElementById('Address').value; 
     const Phone = document.getElementById('Phone').value; 
+     const Name = document.getElementById('Name').value; 
+     const VisitTime = document.getElementById('VisitTime').value; 
+
+
     
     let quote = standardFee;
 
@@ -218,7 +225,9 @@
         damagedVenting,
         rodentInfestation,
         Address,
-        Phone
+        Phone,
+        Name,
+        VisitTime
     };
 }
 
@@ -244,12 +253,12 @@ document.getElementById('sendEmail').addEventListener('click', () => {
         Phone: xxx-xxx-xxxx
         Email: admin@cavacargo.com
 
-        Please complete any information missing below.
 
-        Name:
+        Name:${result.Name}
         Phone Number: ${result.Phone}
         Service Area: ${result.serviceLocation}
         Service Address:${result.Address}
+        Visit Time:${result.VisitTime}
         Vent Length: ${result.ventLength}
         Vent Quantity: ${result.ventQTY}
         Vent Elbows: ${result.ventElbow}
