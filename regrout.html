@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Quote Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            grid-column: span 2;
+            padding: 10px;
+        }
+        .vent-status {
+            grid-column: span 2;
+            display: none;
+        }
+        .infestation-label {
+            grid-column: 1 / 2;
+        }
+        .infestation-note {
+            grid-column: 2 / 3;
+        }
+    </style>
+</head>
+<body>
+
+<h1 style="font-size:14px;">Cavacargo</h1>
+<h1 style="font-size:14px;">xxx-xxx-xxxx</h1>
+<h1 style="font-size:14px;">admin@cavacargo.com</h1>
+
+<h2 style="font-family: Arial, sans-serif; font-size: 1.5em;text-align: center;">Why Re-Grout Your Tiles?</h2>
+<ul style="font-family: Arial, sans-serif; line-height: 1.6;text-align:center;">
+    <p><strong>Prevent Crumbling:</strong> Repair and prevent further crumbling of old grout.</p>
+    <p><strong>Improve Aesthetics:</strong> Refresh the look of your tiles with new grout.</p>
+    <p><strong>Enhance Durability:</strong> Strengthen grout to extend the life of your tilework.</p>
+    <p><strong>Maintain Cleanliness:</strong> Reduce the risk of mold and mildew growth.</p>
+</ul>
+
+<h1 style="font-size:24px; text-align:center;">Re-Grouting Service</h1>
+<div class="container">
+    <label for="groutColor">Number of Grout Colors</label>
+    <select id="groutColor" onchange="calculateQuote()">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+
+    <label for="tileLocation">Tile Location</label>
+    <select id="tileLocation" onchange="calculateQuote()">
+        <option value="floor">Floor</option>
+        <option value="wall">Wall</option>
+        <option value="ceiling">Ceiling</option>
+    </select>
+
+    <label for="squareFootage">Square Footage</label>
+    <input id="squareFootage" type="number" onchange="calculateQuote()">
+
+    <label for="serviceLocation">Service Location</label>
+    <select id="serviceLocation" onchange="calculateQuote()">
+        <option value="Fairview">Fairview</option>
+        <option value="Kerrisdale">Kerrisdale</option>
+        <option value="Kitsilano">Kitsilano</option>
+        <option value="Mount Pleasant">Mount Pleasant</option>
+        <option value="Shaughnessy">Shaughnessy</option>
+        <option value="Spanish Banks">Spanish Banks</option>
+        <option value="UBC">UBC</option>
+    </select>
+
+    <label for="address">Address</label>
+    <input id="address">
+
+    <label for="phone">Phone</label>
+    <input id="phone">
+
+    <label for="name">Name</label>
+    <input id="name">
+
+    <label for="visitTime">Time of Day Service</label>
+    <select id="visitTime" onchange="calculateQuote()">
+        <option value="8-11">8-11</option>
+        <option value="11-1">11-1</option>
+        <option value="1-3">1-3</option>
+        <option value="3-6">3-6</option>
+    </select>
+
+    <button id="calculateEstimate">Calculate Estimate</button>
+    <p id="quoteResult"></p>
+    <p id="note"></p>
+    <button id="sendEmail">Request Quote</button>
+</div>
+
+<script>
+    function calculateQuote() {
+        const groutColor = parseInt(document.getElementById('groutColor').value, 10);
+        const tileLocation = document.getElementById('tileLocation').value;
+        const squareFootage = parseFloat(document.getElementById('squareFootage').value) || 0;
+        const serviceLocation = document.getElementById('serviceLocation').value;
+        const address = document.getElementById('address').value; 
+        const phone = document.getElementById('phone').value; 
+        const name = document.getElementById('name').value; 
+        const visitTime = document.getElementById('visitTime').value; 
+
+        let quote = squareFootage * 3; // $3 per square foot
+
+        // Charge for additional grout colors
+        if (groutColor > 1) {
+            quote += (groutColor - 1) * 10; // $10 for each additional color
+        }
+
+        // Charge based on tile location
+        switch (tileLocation) {
+            case 'wall': quote += 15; break;
+            case 'ceiling': quote += 25; break;
+        }
+
+        // Travel costs based on service location
+        switch (serviceLocation) {
+            case 'Fairview': quote += 15; break;
+            case 'Kerrisdale': quote += 20; break;
+            case 'Kitsilano': quote += 20; break;
+            case 'Mount Pleasant': quote += 30; break;
+            case 'Shaughnessy': quote += 15; break;
+            case 'Spanish Banks': quote += 30; break;
+            case 'UBC': quote += 35; break;
+        }
+
+        return {
+            quote: quote.toFixed(2),
+            groutColor,
+            tileLocation,
+            squareFootage,
+            serviceLocation,
+            address,
+            phone,
+            name,
+            visitTime
+        };
+    }
+
+    document.getElementById('calculateEstimate').addEventListener('click', () => {
+        const result = calculateQuote();
+
+        document.getElementById('quoteResult').innerText = 'Estimated Quote: $' + result.quote;
+
+        // No specific notes for the re-grouting service
+        document.getElementById('note').innerText = '';
+    });
+
+    document.getElementById('sendEmail').addEventListener('click', () => {
+        const result = calculateQuote();
+
+        const emailSubject = encodeURIComponent('Service Request');
+        const emailBody = encodeURIComponent(`
+            Cavacargo
+            Phone: xxx-xxx-xxxx
+            Email: admin@cavacargo.com
+
+            Name: ${result.name}
+            Phone Number: ${result.phone}
+            Service Address: ${result.address}
+            Visit Time: ${result.visitTime}
+            Number of Grout Colors: ${result.groutColor}
+            Tile Location: ${result.tileLocation}
+            Square Footage: ${result.squareFootage} sqft
+            Service Location: ${result.serviceLocation}
+
+            Quoted Price: $${result.quote}
+
+            Important Notice Regarding Your Quote
+
+            Please note that the quote provided is based on the information you’ve supplied. As a result, the final cost may differ from the quote if additional details or changes are required upon arrival.
+
+            Key Points:
+
+            Preliminary Estimate: The provided quote is an initial estimate based on the current selections.
+
+            Potential Adjustments: If there are changes or additional information needed, these may impact the final cost.
+
+            Final Confirmation: A detailed assessment will be conducted when we arrive at the job site, and we will provide a final confirmation of the cost before proceeding.
+
+            We strive to ensure transparency and will work with you to address any adjustments as needed. Feel free to reach out if you have any questions or need further clarification.
+        `);
+
+        // Construct the mailto link
+        const mailtoLink = `mailto:admin@cavacargo.com?subject=${emailSubject}&body=${emailBody}`;
+
+        // Open the default email client
+        window.open(mailtoLink);
+    });
+</script>
+
+<img src="https://github.com/inexasli/cavacargo/raw/main/media/a.jpg" alt="Description of Image">
+<img src="cavacargo/media/aaa.jpg" alt="Description of Image">
+<img src="cavacargo/media/aaaaa.jpg" alt="Description of Image">
+
+</body>
+</html>
