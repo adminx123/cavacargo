@@ -57,6 +57,12 @@
 
 <h1 style="font-size:24px; text-align:center;">Re-Grouting Service</h1>
 <div class="container">
+    <label for="serviceType">Service Type</label>
+    <select id="serviceType" onchange="calculateQuote()">
+        <option value="service">Service</option>
+        <option value="rent">Rent</option>
+    </select>
+
     <label for="groutColor">Number of Grout Colors</label>
     <select id="groutColor" onchange="calculateQuote()">
         <option value="1">1</option>
@@ -111,63 +117,81 @@
 
 <script>
     function calculateQuote() {
-        const groutColor = parseInt(document.getElementById('groutColor').value, 10);
-        const tileLocation = document.getElementById('tileLocation').value;
-        const squareFootage = parseFloat(document.getElementById('squareFootage').value) || 0;
-        const serviceLocation = document.getElementById('serviceLocation').value;
-        const address = document.getElementById('address').value; 
-        const phone = document.getElementById('phone').value; 
-        const name = document.getElementById('name').value; 
-        const visitTime = document.getElementById('visitTime').value; 
+        const serviceType = document.getElementById('serviceType').value;
+        let quote = 0;
 
-        let quote = squareFootage * 3; // $3 per square foot
+        if (serviceType === 'rent') {
+            const squareFootage = parseFloat(document.getElementById('squareFootage').value) || 0;
+            const serviceLocation = document.getElementById('serviceLocation').value;
 
-        // Charge for additional grout colors
-        if (groutColor > 1) {
-            quote += (groutColor - 1) * 10; // $10 for each additional color
+            quote = 100; // Rental fee
+
+            // Additional fee based on service location
+            switch (serviceLocation) {
+                case 'Fairview': quote += 15; break;
+                case 'Kerrisdale': quote += 20; break;
+                case 'Kitsilano': quote += 20; break;
+                case 'Mount Pleasant': quote += 30; break;
+                case 'Shaughnessy': quote += 15; break;
+                case 'Spanish Banks': quote += 30; break;
+                case 'UBC': quote += 35; break;
+            }
+
+            // Charge for grout based on square footage
+            quote += squareFootage * 0.50; // $0.50 per square foot
+        } else {
+            const groutColor = parseInt(document.getElementById('groutColor').value, 10);
+            const tileLocation = document.getElementById('tileLocation').value;
+            const squareFootage = parseFloat(document.getElementById('squareFootage').value) || 0;
+            const serviceLocation = document.getElementById('serviceLocation').value;
+
+            quote = squareFootage * 3; // $3 per square foot
+
+            // Charge for additional grout colors
+            if (groutColor > 1) {
+                quote += (groutColor - 1) * 10; // $10 for each additional color
+            }
+
+            // Charge based on tile location
+            switch (tileLocation) {
+                case 'wall': quote += 15; break;
+                case 'ceiling': quote += 25; break;
+            }
+
+            // Travel costs based on service location
+            switch (serviceLocation) {
+                case 'Fairview': quote += 15; break;
+                case 'Kerrisdale': quote += 20; break;
+                case 'Kitsilano': quote += 20; break;
+                case 'Mount Pleasant': quote += 30; break;
+                case 'Shaughnessy': quote += 15; break;
+                case 'Spanish Banks': quote += 30; break;
+                case 'UBC': quote += 35; break;
+            }
         }
 
-        // Charge based on tile location
-        switch (tileLocation) {
-            case 'wall': quote += 15; break;
-            case 'ceiling': quote += 25; break;
-        }
+        document.getElementById('quoteResult').innerText = 'Estimated Quote: $' + quote.toFixed(2);
 
-        // Travel costs based on service location
-        switch (serviceLocation) {
-            case 'Fairview': quote += 15; break;
-            case 'Kerrisdale': quote += 20; break;
-            case 'Kitsilano': quote += 20; break;
-            case 'Mount Pleasant': quote += 30; break;
-            case 'Shaughnessy': quote += 15; break;
-            case 'Spanish Banks': quote += 30; break;
-            case 'UBC': quote += 35; break;
-        }
-
-        return {
-            quote: quote.toFixed(2),
-            groutColor,
-            tileLocation,
-            squareFootage,
-            serviceLocation,
-            address,
-            phone,
-            name,
-            visitTime
-        };
+        // Display a note if the service type is "service"
+        document.getElementById('note').innerText = serviceType === 'rent' ? '' : 'Important Notice Regarding Your Quote\n\nPlease note that the quote provided is based on the information you’ve supplied. As a result, the final cost may differ from the quote if additional details or changes are required upon arrival.\n\nKey Points:\n\nPreliminary Estimate: The provided quote is an initial estimate based on the current selections.\n\nPotential Adjustments: If there are changes or additional information needed, these may impact the final cost.\n\nFinal Confirmation: A detailed assessment will be conducted when we arrive at the job site, and we will provide a final confirmation of the cost before proceeding.\n\nWe strive to ensure transparency and will work with you to address any adjustments as needed. Feel free to reach out if you have any questions or need further clarification.';
     }
 
-    document.getElementById('calculateEstimate').addEventListener('click', () => {
-        const result = calculateQuote();
-
-        document.getElementById('quoteResult').innerText = 'Estimated Quote: $' + result.quote;
-
-        // No specific notes for the re-grouting service
-        document.getElementById('note').innerText = '';
-    });
+    document.getElementById('calculateEstimate').addEventListener('click', calculateQuote);
 
     document.getElementById('sendEmail').addEventListener('click', () => {
-        const result = calculateQuote();
+        const serviceType = document.getElementById('serviceType').value;
+        const result = {
+            quote: serviceType === 'rent' ? document.getElementById('quoteResult').innerText.replace('Estimated Quote: $', '') : document.getElementById('quoteResult').innerText.replace('Estimated Quote: $', ''),
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            address: document.getElementById('address').value,
+            visitTime: document.getElementById('visitTime').value,
+            groutColor: document.getElementById('groutColor').value,
+            tileLocation: document.getElementById('tileLocation').value,
+            squareFootage: document.getElementById('squareFootage').value,
+            serviceLocation: document.getElementById('serviceLocation').value,
+            serviceType
+        };
 
         const emailSubject = encodeURIComponent('Service Request');
         const emailBody = encodeURIComponent(`
@@ -183,6 +207,7 @@
             Tile Location: ${result.tileLocation}
             Square Footage: ${result.squareFootage} sqft
             Service Location: ${result.serviceLocation}
+            Service Type: ${result.serviceType}
 
             Quoted Price: $${result.quote}
 
