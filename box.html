@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Quote Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            grid-column: span 2;
+            padding: 10px;
+        }
+        .note {
+            grid-column: span 2;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<h1 style="font-size:14px;">Cavacargo</h1>
+<h1 style="font-size:14px;">xxx-xxx-xxxx</h1>
+<h1 style="font-size:14px;">admin@cavacargo.com</h1>
+
+<h2 style="font-family: Arial, sans-serif; font-size: 1.5em; text-align: center;">Get a Quote for Moving Storage Box Rental</h2>
+<ul style="font-family: Arial, sans-serif; line-height: 1.6; text-align: center;">
+    <p><strong>Easy Moving Solutions:</strong> Simplify your move with our easy-to-use quote form.</p>
+</ul>
+
+<h1 style="font-size:24px; text-align:center;">Quote Form</h1>
+<div class="container">
+    <label for="apartmentSize">Apartment Size</label>
+    <select id="apartmentSize" onchange="updateBoxRecommendation()">
+        <option value="studio">Studio</option>
+        <option value="1">1 Bedroom</option>
+        <option value="2">2 Bedroom</option>
+        <option value="3">3 Bedroom</option>
+    </select>
+
+    <label for="numberOfBoxes">Number of Boxes</label>
+    <input id="numberOfBoxes" type="number" min="1" value="20" onchange="calculateQuote()">
+
+    <label for="rackCount">Number of Rolling Clothes Racks</label>
+    <select id="rackCount" onchange="calculateQuote()">
+        <option value="0">None</option>
+        <option value="1">1 Rack</option>
+        <option value="2">2 Racks</option>
+        <option value="3">3 Racks</option>
+        <option value="4">4 Racks</option>
+    </select>
+
+    <label for="deliveryOption">Delivery Option</label>
+    <select id="deliveryOption" onchange="calculateQuote()">
+        <option value="pickup">Pickup</option>
+        <option value="delivery">Delivery</option>
+    </select>
+
+    <label for="serviceLocation">Service Location</label>
+    <select id="serviceLocation" onchange="calculateQuote()">
+        <option value="Fairview">Fairview</option>
+        <option value="Kerrisdale">Kerrisdale</option>
+        <option value="Kitsilano">Kitsilano</option>
+        <option value="Mount Pleasant">Mount Pleasant</option>
+        <option value="Shaughnessy">Shaughnessy</option>
+        <option value="Spanish Banks">Spanish Banks</option>
+        <option value="UBC">UBC</option>
+    </select>
+
+    <label for="address">Address</label>
+    <input id="address" type="text">
+
+    <label for="phone">Phone</label>
+    <input id="phone" type="tel">
+
+    <label for="name">Name</label>
+    <input id="name" type="text">
+
+    <label for="startDate">Rental Start Date</label>
+    <input id="startDate" type="date" onchange="calculateQuote()">
+
+    <label for="endDate">Rental End Date</label>
+    <input id="endDate" type="date" onchange="calculateQuote()">
+
+    <button id="calculateEstimate">Calculate Estimate</button>
+    <p id="quoteResult"></p>
+    <p class="note" id="note"></p>
+    <button id="sendEmail">Request Quote</button>
+</div>
+
+<script>
+    function updateBoxRecommendation() {
+        const apartmentSize = document.getElementById('apartmentSize').value;
+        let recommendedBoxes = 0;
+
+        switch (apartmentSize) {
+            case 'studio':
+                recommendedBoxes = 20;
+                break;
+            case '1':
+                recommendedBoxes = 25;
+                break;
+            case '2':
+                recommendedBoxes = 30;
+                break;
+            case '3':
+                recommendedBoxes = 35;
+                break;
+        }
+
+        document.getElementById('numberOfBoxes').value = recommendedBoxes;
+        calculateQuote();
+    }
+
+    function calculateQuote() {
+        const numberOfBoxes = parseInt(document.getElementById('numberOfBoxes').value, 10) || 0;
+        const rackCount = parseInt(document.getElementById('rackCount').value, 10) || 0;
+        const deliveryOption = document.getElementById('deliveryOption').value;
+        const serviceLocation = document.getElementById('serviceLocation').value;
+
+        // Calculate rental duration in days
+        const startDate = new Date(document.getElementById('startDate').value);
+        const endDate = new Date(document.getElementById('endDate').value);
+        const rentalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) || 1; // Default to 1 day if dates are not valid
+
+        let quote = 0;
+
+        // Box rental cost
+        quote += numberOfBoxes * 15 * rentalDays; // $15 per box per day
+
+        // Rolling clothes racks cost
+        quote += rackCount * 10 * rentalDays; // $10 per rack per day
+
+        // Add delivery cost
+        if (deliveryOption === 'delivery') {
+            quote += 30; // $30 delivery fee
+        }
+
+        // Additional cost based on service location
+        switch (serviceLocation) {
+            case 'Fairview': quote += 15; break;
+            case 'Kerrisdale': quote += 20; break;
+            case 'Kitsilano': quote += 20; break;
+            case 'Mount Pleasant': quote += 30; break;
+            case 'Shaughnessy': quote += 15; break;
+            case 'Spanish Banks': quote += 30; break;
+            case 'UBC': quote += 35; break;
+        }
+
+        document.getElementById('quoteResult').innerText = 'Estimated Quote: $' + quote.toFixed(2);
+
+        document.getElementById('note').innerText = 'Important Notice Regarding Your Quote\n\nPlease note that the quote provided is based on the information you’ve supplied. The final cost may vary depending on additional details or changes. A detailed assessment will be conducted to confirm the final cost before proceeding.\n\nFor any questions or clarifications, please feel free to contact us.';
+    }
+
+    document.getElementById('calculateEstimate').addEventListener('click', calculateQuote);
+
+    document.getElementById('sendEmail').addEventListener('click', () => {
+        const result = {
+            quote: document.getElementById('quoteResult').innerText.replace('Estimated Quote: $', ''),
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            address: document.getElementById('address').value,
+            startDate: document.getElementById('startDate').value,
+            endDate: document.getElementById('endDate').value,
+            numberOfBoxes: document.getElementById('numberOfBoxes').value,
+            rackCount: document.getElementById('rackCount').value,
+            deliveryOption: document.getElementById('deliveryOption').value,
+            serviceLocation: document.getElementById('serviceLocation').value
+        };
+
+        const emailSubject = encodeURIComponent('Storage Box Rental Quote Request');
+        const emailBody = encodeURIComponent(`
+            Cavacargo
+            Phone: xxx-xxx-xxxx
+            Email: admin@cavacargo.com
+
+            Name: ${result.name}
+            Phone Number: ${result.phone}
+            Address: ${result.address}
+            Rental Start Date: ${result.startDate}
+            Rental End Date: ${result.endDate}
+            Number of Boxes: ${result.numberOfBoxes}
+            Number of Rolling Clothes Racks: ${result.rackCount}
+            Delivery Option: ${result.deliveryOption}
+            Service Location: ${result.serviceLocation}
+
+            Quoted Price: $${result.quote}
+
+            Important Notice Regarding Your Quote
+
+            Please note that the quote provided is based on the information you’ve supplied. The final cost may vary depending on additional details or changes. A detailed assessment will be conducted to confirm the final cost before proceeding.
+
+            For any questions or clarifications, please feel free to contact us.
+        `);
+
+        const mailtoLink = `mailto:admin@cavacargo.com?subject=${emailSubject}&body=${emailBody}`;
+
+        window.open(mailtoLink);
+    });
+</script>
+
+</body>
+</html>
