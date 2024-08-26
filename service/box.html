@@ -54,7 +54,7 @@
 <h1 style="font-size:24px; text-align:center;">Quote Form</h1>
 <div class="container">
     <label for="apartmentSize">Apartment Size</label>
-    <select id="apartmentSize" onchange="updateBoxRecommendation()">
+    <select id="apartmentSize">
         <option value="studio">Studio</option>
         <option value="1">1 Bedroom</option>
         <option value="2">2 Bedroom</option>
@@ -62,10 +62,10 @@
     </select>
 
     <label for="numberOfBoxes">Number of Boxes</label>
-    <input id="numberOfBoxes" type="number" min="1" value="20" onchange="calculateQuote()">
+    <input id="numberOfBoxes" type="number" min="1" value="20">
 
     <label for="rackCount">Number of Rolling Clothes Racks</label>
-    <select id="rackCount" onchange="calculateQuote()">
+    <select id="rackCount">
         <option value="0">None</option>
         <option value="1">1 Rack</option>
         <option value="2">2 Racks</option>
@@ -74,13 +74,13 @@
     </select>
 
     <label for="deliveryOption">Delivery Option</label>
-    <select id="deliveryOption" onchange="calculateQuote()">
+    <select id="deliveryOption">
         <option value="pickup">Pickup</option>
         <option value="delivery">Delivery</option>
     </select>
 
     <label for="serviceLocation">Service Location</label>
-    <select id="serviceLocation" onchange="calculateQuote()">
+    <select id="serviceLocation">
         <option value="Fairview">Fairview</option>
         <option value="Kerrisdale">Kerrisdale</option>
         <option value="Kitsilano">Kitsilano</option>
@@ -100,12 +100,11 @@
     <input id="name" type="text">
 
     <label for="startDate">Rental Start Date</label>
-    <input id="startDate" type="date" onchange="calculateQuote()">
+    <input id="startDate" type="date">
 
     <label for="endDate">Rental End Date</label>
-    <input id="endDate" type="date" onchange="calculateQuote()">
+    <input id="endDate" type="date">
 
-    <button id="calculateEstimate">Calculate Estimate</button>
     <p class="error" id="errorResult"></p>
     <p id="quoteResult"></p>
     <p id="depositResult"></p>
@@ -203,7 +202,21 @@
         document.getElementById('note').innerText = 'Important Notice Regarding Your Quote\n\nPlease note that the quote provided is based on the information you’ve supplied. The final cost may vary depending on additional details or changes. A detailed assessment will be conducted to confirm the final cost before proceeding.\n\nFor any questions or clarifications, please feel free to contact us.';
     }
 
-    document.getElementById('calculateEstimate').addEventListener('click', calculateQuote);
+    function setupEventListeners() {
+        document.getElementById('apartmentSize').addEventListener('change', () => {
+            updateBoxRecommendation();
+        });
+
+        document.getElementById('numberOfBoxes').addEventListener('input', calculateQuote);
+        document.getElementById('rackCount').addEventListener('change', calculateQuote);
+        document.getElementById('deliveryOption').addEventListener('change', calculateQuote);
+        document.getElementById('serviceLocation').addEventListener('change', calculateQuote);
+        document.getElementById('startDate').addEventListener('change', calculateQuote);
+        document.getElementById('endDate').addEventListener('change', calculateQuote);
+    }
+
+    // Initialize event listeners
+    setupEventListeners();
 
     document.getElementById('sendEmail').addEventListener('click', () => {
         const result = {
