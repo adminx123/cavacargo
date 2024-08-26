@@ -1,305 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+
+    <link rel="manifest" href="/manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Quote Form</title>
+    <title>INEXASLI</title>
+         <link rel="icon" type="image/x-icon" href="Logo.png">
+
+  
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            max-width: 600px;
-            margin: auto;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input, select {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-        button {
-            grid-column: span 2;
-            padding: 10px;
-        }
-        .vent-status {
-            grid-column: span 2;
-            display: none;
-        }
-        .infestation-label {
-            grid-column: 1 / 2;
-        }
-        .infestation-note {
-            grid-column: 2 / 3;
-        }
-    </style>
-</head>
-<body>
+      body {
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0
+      }
 
+      img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer
+      }
 
-<h1 style="font-size:14px;">Cavacargo</h1>
-<h1 style="font-size:14px;">xxx-xxx-xxxx</h1>
-<h1 style="font-size:14px;">admin@cavacargo.com</h1>
+      h1 {
+        margin-top: 5px;
+        margin-bottom: 5px
+      }
 
-<h2 style="font-family: Arial, sans-serif; font-size: 1.5em;text-align: center;">Why Get Your Dryer Vent Cleaned?</h2>
-    <ul style="font-family: Arial, sans-serif; line-height: 1.6;text-align:center;">
-        <p><strong>Prevent Fires:</strong> Reduce the risk of dryer-related fires caused by lint buildup.</p>
-        <p><strong>Boost Efficiency:</strong> Improve dryer performance and cut drying time.</p>
-        <p><strong>Save Money:</strong> Lower energy bills with a more efficient dryer.</p>
-        <p><strong>Extend Appliance Life:</strong> Avoid costly repairs and extend the life of your dryer.</p>
-        <p><strong>Enhance Safety:</strong> Reduce the risk of mold and improve indoor air quality.</p>
-    </ul>
-
-<h1 style="font-size:24px; text-align:center;">Dryer Vent Cleaning</h1>
-<div class="container">
-    <label for="standardFee">Standard Fee</label>
-    <select id="standardFee" onchange="calculateQuote()">
-        <option value="100">$100</option>
-    </select>
-    
-    <label for="serviceLocation">Location</label>
-    <select id="serviceLocation" onchange="calculateQuote()">
-        <option value="Fairview">Fairview</option>
-        <option value="Kerrisdale">Kerrisdale</option>
-        <option value="Kitsilano">Kitsilano</option>
-        <option value="Mount Pleasant">Mount Pleasant</option>
-        <option value="Shaughnessy">Shaughnessy</option>
-        <option value="Spanish Banks">Spanish Banks</option>
-        <option value="UBC">UBC</option>
-    </select>
-
-    <label for="ventLength">Vent Length</label>
-    <select id="ventLength" onchange="calculateQuote()">
-        <option value="x">Unsure</option>
-        <option value="0-15">0-15ft</option>
-        <option value="16-25">16-25ft</option>
-        <option value="26-xx">26-xxft</option>
-    </select>
-
-    <label for="ventLocation">Vent Location</label>
-    <select id="ventLocation" onchange="calculateQuote()">
-        <option value="groundLevel">Ground Level</option>
-        <option value="roof">Roof *Sorry we are unable to service roof vents at this time.</option>
-        <option value="ladderAccessible">Ladder Accessible + $20</option>
-    </select>
-    
-    <label for="ventQTY">Vents</label>
-    <select id="ventQTY" onchange="calculateQuote()">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-    </select>
-
-    <label for="ventElbow">Vent Elbows</label>
-    <select id="ventElbow" onchange="calculateQuote()">
-        <option value="x">Unsure</option>
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-    </select>
-
-    <label for="damagedVenting">Vent Damage</label>
-    <select id="damagedVenting" onchange="calculateQuote()">
-         <option value="Unsure">Unsure</option>
-        <option value="ventUnsure">No</option>
-        <option value="FH">Replacement Flexible Hose</option>
-        <option value="MVT">Minor Vent Taping</option>
-        <option value="EVC">Exterior Vent Cover</option>
-    </select>
-
-    <label for="RodentInfestation">Rodent Infestation</label>
-    <select id="RodentInfestation" onchange="calculateQuote()">
-        <option value="rodentUnsure">Unsure</option>
-        <option value="rodentNo">No</option>
-        <option value="rodentYes">Yes</option>
-    </select>
-
-<button id="calculateEstimate">Calculate Estimate</button>
-
-
-<label for="Address">Address</label>
-<input id ="Address">
-<label for="Phone">Phone</label>
-<input id = "Phone">
-<label for="Name">Name</label>
-<input id = "Name">
-
-<label for="VisitTime">Time of Day Service</label>
-    <select id="VisitTime" onchange="calculateQuote()">
-        <option value="8-11">8-11</option>
-        <option value="11-1">11-1</option>
-        <option value="1-3">1-3</option>
-         <option value="3-6">3-6</option>
-    </select>
-
-    <button id="sendEmail">Request Quote</button>
-    <p id="quoteResult"></p>
-    <p id="note"></p>
-</div>
-
-<script>
-   function calculateQuote() {
-    const standardFee = parseFloat(document.getElementById('standardFee').value);
-    const serviceLocation = document.getElementById('serviceLocation').value;
-    const ventLength = document.getElementById('ventLength').value;
-    const ventLocation = document.getElementById('ventLocation').value;
-    const ventQTY = document.getElementById('ventQTY').value;
-    const ventElbow = document.getElementById('ventElbow').value;
-    const damagedVenting = document.getElementById('damagedVenting').value;
-    const rodentInfestation = document.getElementById('RodentInfestation').value;
-   const Address = document.getElementById('Address').value; 
-    const Phone = document.getElementById('Phone').value; 
-     const Name = document.getElementById('Name').value; 
-     const VisitTime = document.getElementById('VisitTime').value; 
-
-
-    
-    let quote = standardFee;
-
-    switch (serviceLocation) {
-        case 'Fairview': quote += 15; break;
-        case 'Kerrisdale': quote += 20; break;
-        case 'Mount Pleasant': quote += 30; break;
-        case 'Shaughnessy': quote += 15; break;
-        case 'Kitsilano': quote += 20; break;
-        case 'Spanish Banks': quote += 30; break;
-        case 'UBC': quote += 35; break;
-    }
-
-    switch (ventLength) {
-        case 'x': quote += 0; break;
-        case '0-15': quote += 10; break;
-        case '16-25': quote += 20; break;
-        case '26-xx': quote += 30; break;
-    }
-
-    switch (ventLocation) {
-        case 'roof': quote += 0; break;
-        case 'groundLevel': quote += 0; break;
-        case 'ladderAccessible': quote += 20; break;
-    }
-    
-    switch (ventQTY) {
-        case '1': quote += 10; break;
-        case '2': quote += 20; break;
-        case '3': quote += 30; break;
-    }
-    
-    switch (ventElbow) {
-        case 'x': quote += 0; break;
-        case '0': quote += 0; break;
-        case '1': quote += 10; break;
-        case '2': quote += 20; break;
-        case '3': quote += 30; break;
-    }
-
-    switch (damagedVenting) {
-         case 'Unsure': quote += 0; break;
-        case 'EVC': quote += 25; break;
-        case 'FH': quote += 30; break;
-        case 'MVT': quote += 0; break;
-        case 'ventUnsure': quote += 0; break;
-    }
-
-    switch (rodentInfestation) {
-        case 'rodentUnsure': quote += 0; break;
-        case 'rodentNo': quote += 0; break;
-        case 'rodentYes': quote += 25; break;
-    }
-
-    return {
-        quote: quote.toFixed(2),
-        serviceLocation,
-        ventLength,
-        ventQTY,
-        ventElbow,
-        ventLocation,
-        damagedVenting,
-        rodentInfestation,
-        Address,
-        Phone,
-        Name,
-        VisitTime
-    };
+ #addToHomeScreenBanner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: space-around; /* Change to space-around for symmetrical spacing */
+    align-items: center;
+    padding: 10px;
 }
 
-document.getElementById('calculateEstimate').addEventListener('click', () => {
-    const result = calculateQuote();
+#addToHomeScreenBanner p {
+    margin: 0; /* Remove default margin for the paragraph */
+}
 
-    document.getElementById('quoteResult').innerText = 'Estimated Quote: $' + result.quote;
+#addToHomeScreenBanner button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px; /* Adjust padding for symmetrical size */
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-    // Update the note based on damaged venting and rodent infestation status
-    document.getElementById('note').innerText =
-        'Note: ' +
-        (result.damagedVenting === 'ventUnsure' ? 'Damage Inspection Needed' : '') +
-        (result.damagedVenting === 'ventUnsure' && result.rodentInfestation === 'rodentUnsure' ? ' and ' : '') +
-        (result.rodentInfestation === 'rodentUnsure' ? 'Rodent Inspection Needed' : '');
+/* Hamburger menu styles */
+.menu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 2; /* Ensure it appears above other elements */
+}
+
+.menu div {
+  width: 25px;
+  height: 3px;
+  background-color: #fff; /* Change to white to be visible against a black background */
+  margin: 4px 0;
+  transition: 0.3s;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  background-color: #000;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.dropdown a:hover {
+  background-color: #575757;
+}
+
+.menu.active div:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu.active div:nth-child(2) {
+  opacity: 0;
+}
+
+.menu.active div:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+
+    </style>
+  </head>
+  <body>
+      
+      <!-- Hamburger Menu -->
+<div class="menu" id="menuToggle">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<!-- Dropdown Menu -->
+<div class="dropdown" id="dropdownMenu">
+  <a href="#finance">Bin Rental</a>
+  <a href="#minimal">Specialized Equipment Rental</a>
+   <!-- <a href="#discipline">Discipline</a>
+  <a href="#contact">Contact</a> -->
+</div>
+
+      
+      
+      
+   
+    <img src="Logo.png" alt="Your Logo">
+   <h1 style="font-size:48px">Home Rentals</h1>
+    <h1 style="font-size:48px"></h1>
+ 
+
+<!--
+   
+    "Much like tracking your calorie intake on MyFitnessPal to maintain a healthy lifestyle, IEAL helps you monitor your financial health by tracking your disposable income. Think of disposable income as the financial equivalent of your daily calorie allowance—it's what's left over after accounting for your essential expenses and financial obligations.
+
+Just as you reference your daily calorie intake to make informed dietary choices, you can reference your disposable income to make smarter financial decisions. Whether it's deciding on a budget for entertainment, savings goals, or investments, your disposable income serves as a valuable reference point. IEAL, in conjunction with your certified financial advisor, helps empower you to allocate your money wisely, ensuring that you're not overspending and that you're prioritizing your financial goals effectively.”
+
+    Why use the IEAL? 1. Avoid paying owing a large sum for taxes end of year by understanding your tax obligation
+   2. Get an estimate of your financial landscape and what it means
+    3. create hypothetical scenarios such, as taking on new debt, changing a job, etc and see how it may effect you.
+    
+    
+    
+    -->
+    
+ <script>
+// Hamburger menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const dropdownMenu = document.getElementById('dropdownMenu');
+
+// Event listener for the hamburger menu
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('active');
+  // Toggle display of dropdown menu
+  if (dropdownMenu.style.display === 'block') {
+    dropdownMenu.style.display = 'none';
+  } else {
+    dropdownMenu.style.display = 'block';
+  }
 });
 
-document.getElementById('sendEmail').addEventListener('click', () => {
-    const result = calculateQuote();
-
-    const emailSubject = encodeURIComponent('Service Request');
-    const emailBody = encodeURIComponent(`
-        Cavacargo
-        Phone: xxx-xxx-xxxx
-        Email: admin@cavacargo.com
-
-
-        Name:${result.Name}
-        Phone Number: ${result.Phone}
-        Service Area: ${result.serviceLocation}
-        Service Address:${result.Address}
-        Visit Time:${result.VisitTime}
-        Vent Length: ${result.ventLength}
-        Vent Quantity: ${result.ventQTY}
-        Vent Elbows: ${result.ventElbow}
-        Vent Location: ${result.ventLocation}
-        Damaged Venting: ${result.damagedVenting}
-        Rodent Infestation: ${result.rodentInfestation}
-
-        Quoted Price: $${result.quote}
-    
-Important Notice Regarding Your Quote
-
-Please note that the quote provided is based on the information you’ve supplied and includes some options where selections were marked as “unsure.” As a result, the final cost may differ from the quote if additional details or changes are required upon arrival.
-
-Key Points:
-
-Preliminary Estimate: The provided quote is an initial estimate based on the current selections.
-
-Potential Adjustments: If there are changes or additional information needed that were marked as “unsure,” these may impact the final cost.
-
-Final Confirmation: A detailed assessment will be conducted when we arrive at the job site, and we will provide a final confirmation of the cost before proceeding.
-
-We strive to ensure transparency and will work with you to address any adjustments as needed. Feel free to reach out if you have any questions or need further clarification.
-    
-    
-    `);
-
-    // Construct the mailto link
-    const mailtoLink = `mailto:admin@cavacargo.com?subject=${emailSubject}&body=${emailBody}`;
-
-    // Open the default email client
-    window.open(mailtoLink);
+// Optional: Close the dropdown menu if clicked outside
+document.addEventListener('click', (event) => {
+  if (!menuToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+    dropdownMenu.style.display = 'none';
+    menuToggle.classList.remove('active');
+  }
 });
 
+function addToHomeScreen() {
+  // Check if browser supports adding to home screen
+  if ('addEventListener' in window) {
+    window.addEventListener('beforeinstallprompt', (event) => {
+      // Prevent the mini-infobar from appearing on mobile
+      event.preventDefault();
+      // Show the install prompt
+      document.getElementById("addToHomeScreenBanner").style.display = "block";
+      document.getElementById("addToHomeScreenBanner").querySelector("button").addEventListener("click", () => {
+        event.prompt();
+      });
+    });
+  } else {
+    // Not supported, display message
+    alert("Click your browser's share button & 'Add to Home Screen'");
+  }
+}
+
+// Add event listener to the button
+const addToHomeScreenButton = document.getElementById("addToHomeScreenBanner").querySelector("button");
+addToHomeScreenButton.addEventListener("click", addToHomeScreen);
 </script>
 
-
-
-<img src="https://github.com/inexasli/cavacargo/raw/main/media/a.jpg" alt="Description of Image">
-<img src="cavacargo/media/aaa.jpg" alt="Description of Image">
-<img src="cavacargo/media/aaaaa.jpg" alt="Description of Image">
-
-
-</body>
+ 
+   </body>
 </html>
