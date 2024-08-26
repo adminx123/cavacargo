@@ -33,6 +33,11 @@
             grid-column: span 2;
             font-style: italic;
         }
+        .error {
+            color: red;
+            grid-column: span 2;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -101,12 +106,18 @@
     <input id="endDate" type="date" onchange="calculateQuote()">
 
     <button id="calculateEstimate">Calculate Estimate</button>
+    <p class="error" id="errorResult"></p>
     <p id="quoteResult"></p>
+    <p id="depositResult"></p>
+    <p id="totalDueResult"></p>
     <p class="note" id="note"></p>
     <button id="sendEmail">Request Quote</button>
 </div>
 
 <script>
+    const ratePerDayPerBox = 0.7142857143; // Rate per day per box
+    const minRentalDays = 7; // Minimum rental period in days
+
     function updateBoxRecommendation() {
         const apartmentSize = document.getElementById('apartmentSize').value;
         let recommendedBoxes = 0;
@@ -139,12 +150,25 @@
         // Calculate rental duration in days
         const startDate = new Date(document.getElementById('startDate').value);
         const endDate = new Date(document.getElementById('endDate').value);
-        const rentalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) || 1; // Default to 1 day if dates are not valid
+        const rentalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
 
         let quote = 0;
+        let error = '';
 
-        // Box rental cost
-        quote += numberOfBoxes * 15 * rentalDays; // $15 per box per day
+        // Check if rental period is valid
+        if (rentalDays < minRentalDays) {
+            error = `Rental period must be at least ${minRentalDays} days.`;
+            document.getElementById('errorResult').innerText = error;
+            document.getElementById('quoteResult').innerText = '';
+            document.getElementById('depositResult').innerText = '';
+            document.getElementById('totalDueResult').innerText = '';
+            return;
+        } else {
+            document.getElementById('errorResult').innerText = '';
+        }
+
+        // Calculate quote
+        quote += numberOfBoxes * ratePerDayPerBox * rentalDays;
 
         // Rolling clothes racks cost
         quote += rackCount * 10 * rentalDays; // $10 per rack per day
@@ -165,7 +189,16 @@
             case 'UBC': quote += 35; break;
         }
 
+        // Calculate deposit
+        const deposit = (numberOfBoxes * 25) + (rackCount * 100);
+
+        // Calculate total due
+        const totalDue = quote + deposit;
+
+        // Update the results on the page
         document.getElementById('quoteResult').innerText = 'Estimated Quote: $' + quote.toFixed(2);
+        document.getElementById('depositResult').innerText = 'Deposit Amount: $' + deposit.toFixed(2);
+        document.getElementById('totalDueResult').innerText = 'Total Due Amount: $' + totalDue.toFixed(2);
 
         document.getElementById('note').innerText = 'Important Notice Regarding Your Quote\n\nPlease note that the quote provided is based on the information you’ve supplied. The final cost may vary depending on additional details or changes. A detailed assessment will be conducted to confirm the final cost before proceeding.\n\nFor any questions or clarifications, please feel free to contact us.';
     }
@@ -175,6 +208,8 @@
     document.getElementById('sendEmail').addEventListener('click', () => {
         const result = {
             quote: document.getElementById('quoteResult').innerText.replace('Estimated Quote: $', ''),
+            deposit: document.getElementById('depositResult').innerText.replace('Deposit Amount: $', ''),
+            totalDue: document.getElementById('totalDueResult').innerText.replace('Total Due Amount: $', ''),
             name: document.getElementById('name').value,
             phone: document.getElementById('phone').value,
             address: document.getElementById('address').value,
@@ -202,7 +237,9 @@
             Delivery Option: ${result.deliveryOption}
             Service Location: ${result.serviceLocation}
 
-            Quoted Price: $${result.quote}
+            Estimated Quote: $${result.quote}
+            Deposit Amount: $${result.deposit}
+            Total Due Amount: $${result.totalDue}
 
             Important Notice Regarding Your Quote
 
