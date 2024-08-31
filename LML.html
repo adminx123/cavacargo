@@ -143,7 +143,29 @@
     <img src="logo.pdf" alt="Your Logo">
     <h1 style="font-size:36px">Last Mile Logistics Questionnaire</h1>
 
+    
+        
+        
+
     <form id="questionnaire">
+        
+        
+        <div class="question"> 
+            <h3>Shipper</h3>
+            <label for="shipperName">Shipper Name:</label>
+            <input type="text" id="shipperName" required>
+             </div>
+            
+            <div class="question">
+            <label for="shipperEmail">Shipper Email:</label>
+            <input type="email" id="shipperEmail" required>
+            </div>
+            
+            <div class="question">
+            <label for="shipperPhone">Shipper Phone Number:</label>
+            <input type="tel" id="shipperPhone" required>
+       </div>
+        
         <div class="question">
             <label for="transportDate">Transportation Date:</label>
             <input type="text" id="transportDate" required>
@@ -198,30 +220,12 @@
             </select>
         </div>
         
-        <!-- Pickup and Delivery Location -->
-        <div class="question">
+
+<div class="question">
             <label for="pickupLocation">Pickup Location:</label>
             <textarea id="pickupLocation" rows="3" required></textarea>
         </div>
         
-        <div class="question">
-            <label for="deliveryLocation">Delivery Location:</label>
-            <textarea id="deliveryLocation" rows="3" required></textarea>
-        </div>
-
-        <!-- Shipper Contact Details -->
-        <div class="question">
-            <h3>Shipper Contact Details</h3>
-            <label for="shipperName">Shipper Name:</label>
-            <input type="text" id="shipperName" required>
-            
-            <label for="shipperEmail">Shipper Email:</label>
-            <input type="email" id="shipperEmail" required>
-            
-            <label for="shipperPhone">Shipper Phone Number:</label>
-            <input type="tel" id="shipperPhone" required>
-        </div>
-
         <!-- Receiver Contact Details -->
         <div class="question">
             <h3>Receiver Contact Details</h3>
@@ -233,6 +237,11 @@
             
             <label for="receiverPhone">Receiver Phone Number:</label>
             <input type="tel" id="receiverPhone" required>
+        </div>
+
+        <div class="question">
+            <label for="deliveryLocation">Delivery Location:</label>
+            <textarea id="deliveryLocation" rows="3" required></textarea>
         </div>
 
         <button type="button" id="submitQuestionnaire">Submit</button>
