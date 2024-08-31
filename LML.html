@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="manifest" href="/manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cava Cargo - Last Mile Logistics Questionnaire</title>
+    <link rel="icon" type="image/x-icon" href="Logo.pdf">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+  
+    <style>
+      body {
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+      }
+      h1 {
+        margin-top: 5px;
+        margin-bottom: 20px;
+      }
+      /* Hamburger menu styles */
+      .menu {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        z-index: 2;
+      }
+      .menu div {
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        margin: 4px 0;
+        transition: 0.3s;
+      }
+      .dropdown {
+        display: none;
+        position: absolute;
+        top: 50px;
+        right: 10px;
+        background-color: #000;
+        border-radius: 5px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+      .dropdown a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+      }
+      .dropdown a:hover {
+        background-color: #575757;
+      }
+      .menu.active div:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+      .menu.active div:nth-child(2) {
+        opacity: 0;
+      }
+      .menu.active div:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+      /* Questionnaire styles */
+      #questionnaire {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #222;
+        border-radius: 10px;
+      }
+      .question {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input[type="text"],
+      input[type="number"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        background-color: #333;
+        color: #fff;
+        border: 1px solid #444;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      #result {
+        margin-top: 20px;
+        font-weight: bold;
+        text-align: left;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hamburger Menu -->
+    <div class="menu" id="menuToggle">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <!-- Dropdown Menu -->
+    <div class="dropdown" id="dropdownMenu">
+      <a href="/service/box.html">Bin Rental</a>
+    </div>
+    
+    <img src="logo.pdf" alt="Your Logo">
+    <h1 style="font-size:36px">Last Mile Logistics Questionnaire</h1>
+    
+    <div id="questionnaire">
+      <div class="question">
+        <label for="businessName">Business Name:</label>
+        <input type="text" id="businessName" required>
+      </div>
+
+      <div class="question">
+        <label for="contactName">Contact Person Name:</label>
+        <input type="text" id="contactName" required>
+      </div>
+      
+      <div class="question">
+        <label for="contactEmail">Contact Email:</label>
+        <input type="text" id="contactEmail" required>
+      </div>
+
+      <div class="question">
+        <label for="contactPhone">Contact Phone Number:</label>
+        <input type="text" id="contactPhone" required>
+      </div>
+
+      <div class="question">
+        <label for="pickupLocation">Pickup Location:</label>
+        <input type="text" id="pickupLocation" required>
+      </div>
+      
+      <div class="question">
+        <label for="deliveryLocation">Delivery Location:</label>
+        <input type="text" id="deliveryLocation" required>
+      </div>
+      
+      <div class="question">
+        <label for="transportDate">Transportation Date:</label>
+        <input type="text" id="transportDate" required>
+      </div>
+
+      <div class="question">
+        <label for="dayTime">What time of day will the transportation occur?</label>
+        <select id="dayTime" required>
+          <option value="nopref">No Preference</option>
+          <option value="morning">Morning (6 AM - 12 PM)</option>
+          <option value="afternoon">Afternoon (12 PM - 6 PM)</option>
+          <option value="evening">Evening (6 PM - 12 AM)</option>
+          <option value="night">Night (12 AM - 6 AM)</option>
+        </select>
+      </div>
+      
+      <div class="question">
+        <label for="goodsType">What type of goods are being transported?</label>
+        <input type="text" id="goodsType" required>
+      </div>
+      
+      <div class="question">
+        <label for="goodsValue">Approximate value of goods (in CAD):</label>
+        <input type="number" id="goodsValue" required>
+      </div>
+      
+      <div class="question">
+        <label for="weight">Approximate weight of goods (in kg):</label>
+        <input type="number" id="weight" required>
+      </div>
+      
+      <div class="question">
+        <label for="volume">Approximate volume of goods (in cubic feet):</label>
+        <input type="number" id="volume" required>
+      </div>
+      
+      <div class="question">
+        <label for="fragile">Are the goods fragile?</label>
+        <select id="fragile" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      
+      <div class="question">
+        <label for="temperatureSensitive">Are the goods temperature-sensitive?</label>
+        <select id="temperatureSensitive" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      
+      <button id="submitQuestionnaire">Submit</button>
+      
+      <div id="result"></div>
+    </div>
+ 
+    <script>
+    // Initialize flatpickr for the date picker
+    flatpickr("#transportDate", {
+      enableTime: false,
+      dateFormat: "Y-m-d",
+      minDate: "today"
+    });
+
+    // Initialize Google Places Autocomplete
+    function initAutocomplete() {
+      const pickupInput = document.getElementById('pickupLocation');
+      const deliveryInput = document.getElementById('deliveryLocation');
+      
+      const pickupAutocomplete = new google.maps.places.Autocomplete(pickupInput);
+      const deliveryAutocomplete = new google.maps.places.Autocomplete(deliveryInput);
+    }
+
+    window.onload = initAutocomplete;
+
+    // Questionnaire functionality
+    const submitButton = document.getElementById('submitQuestionnaire');
+    const resultDiv = document.getElementById('result');
+    
+    submitButton.addEventListener('click', () => {
+      const businessName = document.getElementById('businessName').value;
+      const contactName = document.getElementById('contactName').value;
+      const contactEmail = document.getElementById('contactEmail').value;
+      const contactPhone = document.getElementById('contactPhone').value;
+      const transportDate = document.getElementById('transportDate').value;
+      const dayTime = document.getElementById('dayTime').value;
+      const goodsType = document.getElementById('goodsType').value;
+      const goodsValue = document.getElementById('goodsValue').value;
+      const weight = document.getElementById('weight').value;
+      const volume = document.getElementById('volume').value;
+      const fragile = document.getElementById('fragile').value;
+      const temperatureSensitive = document.getElementById('temperatureSensitive').value;
+      const pickupLocation = document.getElementById('pickupLocation').value;
+      const deliveryLocation = document.getElementById('deliveryLocation').value;
+      
+      if (businessName && contactName && contactEmail && contactPhone && transportDate && dayTime && goodsType && goodsValue && weight && volume && fragile && temperatureSensitive && pickupLocation && deliveryLocation) {
+        let emailBody = `Request for Last Mile Logistics Service\n\n`;
+        emailBody += `Business Name: ${businessName}\n`;
+        emailBody += `Contact Person Name: ${contactName}\n`;
+        emailBody += `Contact Email: ${contactEmail}\n`;
+        emailBody += `Contact Phone Number: ${contactPhone}\n`;
+        emailBody += `Transportation Date: ${transportDate}\n`;
+        emailBody += `Time of day: ${dayTime}\n`;
+        emailBody += `Goods type: ${goodsType}\n`;
+        emailBody += `Goods value: $${goodsValue} CAD\n`;
+        emailBody += `Weight: ${weight} kg\n`;
+        emailBody += `Volume: ${volume} ft³\n`;
+        emailBody += `Fragile: ${fragile}\n`;
+        emailBody += `Temperature-sensitive: ${temperatureSensitive}\n`;
+        emailBody += `Pickup Location: ${pickupLocation}\n`;
+        emailBody += `Delivery Location: ${deliveryLocation}\n`;
+        
+        // Encode the email body for use in the mailto link
+        const encodedBody = encodeURIComponent(emailBody);
+        
+        // Create the mailto link
+        const mailtoLink = `mailto:admin@cavacargo.com?subject=Request for Service&body=${encodedBody}`;
+        
+        // Open the user's default email client
+        window.location.href = mailtoLink;
+        
+        resultDiv.innerText = "Opening your email client. If it doesn't open automatically, please check your pop-up blocker settings.";
+      } else {
+        resultDiv.innerText = 'Please fill out all fields before submitting.';
+      }
+    });
+    </script>
+  </body>
+</html>
