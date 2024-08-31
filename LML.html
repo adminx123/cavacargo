@@ -141,85 +141,99 @@
     <img src="logo.pdf" alt="Your Logo">
     <h1 style="font-size:36px">Last Mile Logistics Questionnaire</h1>
 
-    <div id="questionnaire">
-        <div class="question">
-            <label for="businessName">Business Name:</label>
-            <input type="text" id="businessName" required>
-        </div>
-        <div class="question">
-            <label for="contactName">Contact Person Name:</label>
-            <input type="text" id="contactName" required>
-        </div>
-        <div class="question">
-            <label for="contactEmail">Contact Email:</label>
-            <input type="text" id="contactEmail" required>
-        </div>
-        <div class="question">
-            <label for="contactPhone">Contact Phone Number:</label>
-            <input type="text" id="contactPhone" required>
-        </div>
-        <div class="question">
-            <label for="transportDate">Transportation Date:</label>
-            <input type="text" id="transportDate" required>
-        </div>
-        <div class="question">
-            <label for="dayTime">What time of day will the transportation occur?</label>
-            <select id="dayTime" required>
-                <option value="nopref">No Preference</option>
-                <option value="morning">Morning (6 AM - 12 PM)</option>
-                <option value="afternoon">Afternoon (12 PM - 6 PM)</option>
-                <option value="evening">Evening (6 PM - 12 AM)</option>
-                <option value="night">Night (12 AM - 6 AM)</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="goodsType">What type of goods are being transported?</label>
-            <input type="text" id="goodsType" required>
-        </div>
-        <div class="question">
-            <label for="goodsValue">Approximate value of goods (in CAD):</label>
-            <input type="number" id="goodsValue" required>
-        </div>
-        <div class="question">
-            <label for="weight">Approximate weight of goods (in kg):</label>
-            <input type="number" id="weight" required>
-        </div>
-        <div class="question">
-            <label for="volume">Approximate volume of goods (in cubic feet):</label>
-            <input type="number" id="volume" required>
-        </div>
-        <div class="question">
-            <label for="fragile">Are the goods fragile?</label>
-            <select id="fragile" required>
-                <option value="">Select an option</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="temperatureSensitive">Are the goods temperature-sensitive?</label>
-            <select id="temperatureSensitive" required>
-                <option value="">Select an option</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="pickupLocation">Pickup Location:</label>
-            <input type="text" id="pickupLocation" required>
-        </div>
-        <div class="question">
-            <label for="deliveryLocation">Delivery Location:</label>
-            <input type="text" id="deliveryLocation" required>
-        </div>
-
-        <button id="submitQuestionnaire">Submit</button>
-        <button id="clearForm">Clear Form</button>
-
-        <div id="result"></div>
+   <form id="questionnaire">
+    <div class="question">
+        <label for="transportDate">Transportation Date:</label>
+        <input type="text" id="transportDate" required>
     </div>
 
-    <script>
+    <div class="question">
+        <label for="dayTime">What time of day will the transportation occur?</label>
+        <select id="dayTime" required>
+            <option value="nopref">No Preference</option>
+            <option value="morning">Morning (6 AM - 12 PM)</option>
+            <option value="afternoon">Afternoon (12 PM - 6 PM)</option>
+            <option value="evening">Evening (6 PM - 12 AM)</option>
+            <option value="night">Night (12 AM - 6 AM)</option>
+        </select>
+    </div>
+    
+    <div class="question">
+        <label for="goodsType">What type of goods are being transported?</label>
+        <input type="text" id="goodsType" required>
+    </div>
+    
+    <div class="question">
+        <label for="goodsValue">Approximate value of goods (in CAD):</label>
+        <input type="number" id="goodsValue" required>
+    </div>
+    
+    <div class="question">
+        <label for="weight">Approximate weight of goods (in kg):</label>
+        <input type="number" id="weight" required>
+    </div>
+    
+    <div class="question">
+        <label for="volume">Approximate volume of goods (in cubic feet):</label>
+        <input type="number" id="volume" required>
+    </div>
+    
+    <div class="question">
+        <label for="fragile">Are the goods fragile?</label>
+        <select id="fragile" required>
+            <option value="">Select an option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+    </div>
+    
+    <div class="question">
+        <label for="temperatureSensitive">Are the goods temperature-sensitive?</label>
+        <select id="temperatureSensitive" required>
+            <option value="">Select an option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+    </div>
+    
+    <div class="question">
+        <label for="pickupLocation">Pickup Location:</label>
+        <textarea id="pickupLocation" rows="3" required></textarea>
+    </div>
+    
+    <div class="question">
+        <label for="deliveryLocation">Delivery Location:</label>
+        <textarea id="deliveryLocation" rows="3" required></textarea>
+    </div>
+    
+    <div class="question">
+        <label for="businessName">Business Name:</label>
+        <input type="text" id="businessName" required>
+    </div>
+
+    <div class="question">
+        <label for="contactName">Contact Person Name:</label>
+        <input type="text" id="contactName" required>
+    </div>
+
+    <div class="question">
+        <label for="contactEmail">Contact Email:</label>
+        <input type="email" id="contactEmail" required>
+    </div>
+
+    <div class="question">
+        <label for="contactPhone">Contact Phone Number:</label>
+        <input type="tel" id="contactPhone" required>
+    </div>
+
+    <button type="button" id="submitQuestionnaire">Submit</button>
+    <button type="button" id="clearForm">Clear Form</button>
+    
+    <div id="result"></div>
+</form>
+
+
+   <script>
 // Hamburger menu toggle
 const menuToggle = document.getElementById('menuToggle');
 const dropdownMenu = document.getElementById('dropdownMenu');
