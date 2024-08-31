@@ -83,10 +83,10 @@
             padding: 20px;
             background-color: #222;
             border-radius: 10px;
+            text-align: left;
         }
         .question {
             margin-bottom: 20px;
-            text-align: left;
         }
         label {
             display: block;
@@ -94,6 +94,8 @@
         }
         input[type="text"],
         input[type="number"],
+        input[type="email"],
+        input[type="tel"],
         select,
         textarea {
             width: 100%;
@@ -121,8 +123,8 @@
         #result {
             margin-top: 20px;
             font-weight: bold;
-            text-align: left;
             white-space: pre-wrap;
+            text-align: left;
         }
     </style>
 </head>
@@ -141,198 +143,218 @@
     <img src="logo.pdf" alt="Your Logo">
     <h1 style="font-size:36px">Last Mile Logistics Questionnaire</h1>
 
-   <form id="questionnaire">
-    <div class="question">
-        <label for="transportDate">Transportation Date:</label>
-        <input type="text" id="transportDate" required>
-    </div>
+    <form id="questionnaire">
+        <div class="question">
+            <label for="transportDate">Transportation Date:</label>
+            <input type="text" id="transportDate" required>
+        </div>
 
-    <div class="question">
-        <label for="dayTime">What time of day will the transportation occur?</label>
-        <select id="dayTime" required>
-            <option value="nopref">No Preference</option>
-            <option value="morning">Morning (6 AM - 12 PM)</option>
-            <option value="afternoon">Afternoon (12 PM - 6 PM)</option>
-            <option value="evening">Evening (6 PM - 12 AM)</option>
-            <option value="night">Night (12 AM - 6 AM)</option>
-        </select>
-    </div>
-    
-    <div class="question">
-        <label for="goodsType">What type of goods are being transported?</label>
-        <input type="text" id="goodsType" required>
-    </div>
-    
-    <div class="question">
-        <label for="goodsValue">Approximate value of goods (in CAD):</label>
-        <input type="number" id="goodsValue" required>
-    </div>
-    
-    <div class="question">
-        <label for="weight">Approximate weight of goods (in kg):</label>
-        <input type="number" id="weight" required>
-    </div>
-    
-    <div class="question">
-        <label for="volume">Approximate volume of goods (in cubic feet):</label>
-        <input type="number" id="volume" required>
-    </div>
-    
-    <div class="question">
-        <label for="fragile">Are the goods fragile?</label>
-        <select id="fragile" required>
-            <option value="">Select an option</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
-    </div>
-    
-    <div class="question">
-        <label for="temperatureSensitive">Are the goods temperature-sensitive?</label>
-        <select id="temperatureSensitive" required>
-            <option value="">Select an option</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
-    </div>
-    
-    <div class="question">
-        <label for="pickupLocation">Pickup Location:</label>
-        <textarea id="pickupLocation" rows="3" required></textarea>
-    </div>
-    
-    <div class="question">
-        <label for="deliveryLocation">Delivery Location:</label>
-        <textarea id="deliveryLocation" rows="3" required></textarea>
-    </div>
-    
-    <div class="question">
-        <label for="businessName">Business Name:</label>
-        <input type="text" id="businessName" required>
-    </div>
+        <div class="question">
+            <label for="dayTime">What time of day will the transportation occur?</label>
+            <select id="dayTime" required>
+                <option value="nopref">No Preference</option>
+                <option value="morning">Morning (6 AM - 12 PM)</option>
+                <option value="afternoon">Afternoon (12 PM - 6 PM)</option>
+                <option value="evening">Evening (6 PM - 12 AM)</option>
+                <option value="night">Night (12 AM - 6 AM)</option>
+            </select>
+        </div>
+        
+        <div class="question">
+            <label for="goodsType">What type of goods are being transported?</label>
+            <input type="text" id="goodsType" required>
+        </div>
+        
+        <div class="question">
+            <label for="goodsValue">Approximate value of goods (in CAD):</label>
+            <input type="number" id="goodsValue" required>
+        </div>
+        
+        <div class="question">
+            <label for="weight">Approximate weight of goods (in kg):</label>
+            <input type="number" id="weight" required>
+        </div>
+        
+        <div class="question">
+            <label for="volume">Approximate volume of goods (in cubic feet):</label>
+            <input type="number" id="volume" required>
+        </div>
+        
+        <div class="question">
+            <label for="fragile">Are the goods fragile?</label>
+            <select id="fragile" required>
+                <option value="">Select an option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        
+        <div class="question">
+            <label for="temperatureSensitive">Are the goods temperature-sensitive?</label>
+            <select id="temperatureSensitive" required>
+                <option value="">Select an option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        
+        <!-- Pickup and Delivery Location -->
+        <div class="question">
+            <label for="pickupLocation">Pickup Location:</label>
+            <textarea id="pickupLocation" rows="3" required></textarea>
+        </div>
+        
+        <div class="question">
+            <label for="deliveryLocation">Delivery Location:</label>
+            <textarea id="deliveryLocation" rows="3" required></textarea>
+        </div>
 
-    <div class="question">
-        <label for="contactName">Contact Person Name:</label>
-        <input type="text" id="contactName" required>
-    </div>
+        <!-- Shipper Contact Details -->
+        <div class="question">
+            <h3>Shipper Contact Details</h3>
+            <label for="shipperName">Shipper Name:</label>
+            <input type="text" id="shipperName" required>
+            
+            <label for="shipperEmail">Shipper Email:</label>
+            <input type="email" id="shipperEmail" required>
+            
+            <label for="shipperPhone">Shipper Phone Number:</label>
+            <input type="tel" id="shipperPhone" required>
+        </div>
 
-    <div class="question">
-        <label for="contactEmail">Contact Email:</label>
-        <input type="email" id="contactEmail" required>
-    </div>
+        <!-- Receiver Contact Details -->
+        <div class="question">
+            <h3>Receiver Contact Details</h3>
+            <label for="receiverName">Receiver Name:</label>
+            <input type="text" id="receiverName" required>
+            
+            <label for="receiverEmail">Receiver Email:</label>
+            <input type="email" id="receiverEmail" required>
+            
+            <label for="receiverPhone">Receiver Phone Number:</label>
+            <input type="tel" id="receiverPhone" required>
+        </div>
 
-    <div class="question">
-        <label for="contactPhone">Contact Phone Number:</label>
-        <input type="tel" id="contactPhone" required>
-    </div>
+        <button type="button" id="submitQuestionnaire">Submit</button>
+        <button type="button" id="clearForm">Clear Form</button>
+        
+        <div id="result"></div>
+    </form>
 
-    <button type="button" id="submitQuestionnaire">Submit</button>
-    <button type="button" id="clearForm">Clear Form</button>
-    
-    <div id="result"></div>
-</form>
+    <script>
+    // Hamburger menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
 
-
-  <script>
-// Hamburger menu toggle
-const menuToggle = document.getElementById('menuToggle');
-const dropdownMenu = document.getElementById('dropdownMenu');
-
-menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-});
-
-document.addEventListener('click', (event) => {
-    if (!menuToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-        dropdownMenu.style.display = 'none';
-        menuToggle.classList.remove('active');
-    }
-});
-
-flatpickr("#transportDate", {
-    enableTime: false,
-    dateFormat: "Y-m-d",
-    minDate: "today"
-});
-
-// Set cookie
-function setCookie(name, value, days) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
-    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/;secure;SameSite=Strict`;
-}
-
-// Get cookie
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
-}
-
-// Load data from cookies
-function loadCookies() {
-    document.getElementById('businessName').value = getCookie('businessName') || '';
-    document.getElementById('contactName').value = getCookie('contactName') || '';
-    document.getElementById('contactEmail').value = getCookie('contactEmail') || '';
-    document.getElementById('contactPhone').value = getCookie('contactPhone') || '';
-}
-
-window.onload = loadCookies;
-
-document.getElementById('submitQuestionnaire').addEventListener('click', () => {
-    const businessName = document.getElementById('businessName').value;
-    const contactName = document.getElementById('contactName').value;
-    const contactEmail = document.getElementById('contactEmail').value;
-    const contactPhone = document.getElementById('contactPhone').value;
-    const transportDate = document.getElementById('transportDate').value;
-    const dayTime = document.getElementById('dayTime').value;
-    const goodsType = document.getElementById('goodsType').value;
-    const goodsValue = document.getElementById('goodsValue').value;
-    const weight = document.getElementById('weight').value;
-    const volume = document.getElementById('volume').value;
-    const fragile = document.getElementById('fragile').value;
-    const temperatureSensitive = document.getElementById('temperatureSensitive').value;
-    const pickupLocation = document.getElementById('pickupLocation').value;
-    const deliveryLocation = document.getElementById('deliveryLocation').value;
-
-    if (businessName && contactName && contactEmail && contactPhone && transportDate && dayTime && goodsType && goodsValue && weight && volume && fragile && temperatureSensitive && pickupLocation && deliveryLocation) {
-        setCookie('businessName', businessName, 7);
-        setCookie('contactName', contactName, 7);
-        setCookie('contactEmail', contactEmail, 7);
-        setCookie('contactPhone', contactPhone, 7);
-
-        let emailBody = `Request for Last Mile Logistics Service\n\n`;
-        emailBody += `Business Name: ${businessName}\n`;
-        emailBody += `Contact Person Name: ${contactName}\n`;
-        emailBody += `Contact Email: ${contactEmail}\n`;
-        emailBody += `Contact Phone Number: ${contactPhone}\n`;
-        emailBody += `Transportation Date: ${transportDate}\n`;
-        emailBody += `Time of day: ${dayTime}\n`;
-        emailBody += `Goods type: ${goodsType}\n`;
-        emailBody += `Goods value: $${goodsValue}\n`;
-        emailBody += `Weight: ${weight} kg\n`;
-        emailBody += `Volume: ${volume} cubic feet\n`;
-        emailBody += `Fragile: ${fragile}\n`;
-        emailBody += `Temperature-sensitive: ${temperatureSensitive}\n`;
-        emailBody += `Pickup Location: ${pickupLocation}\n`;
-        emailBody += `Delivery Location: ${deliveryLocation}\n`;
-
-        const encodedBody = encodeURIComponent(emailBody);
-        const mailtoLink = `mailto:admin@cavacargo.com?subject=Request for Service&body=${encodedBody}`;
-        window.location.href = mailtoLink;
-
-        document.getElementById('result').innerText = "Opening your email client. If it doesn't open automatically, please check your pop-up blocker settings.";
-    } else {
-        document.getElementById('result').innerText = 'Please fill out all fields before submitting.';
-    }
-});
-
-// Clear form functionality
-document.getElementById('clearForm').addEventListener('click', () => {
-    document.getElementById('questionnaire').reset();
-    document.cookie.split(';').forEach(c => {
-        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/");
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
     });
-});
-</script>
+
+    document.addEventListener('click', (event) => {
+        if (!menuToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.style.display = 'none';
+            menuToggle.classList.remove('active');
+        }
+    });
+
+    flatpickr("#transportDate", {
+        enableTime: false,
+        dateFormat: "Y-m-d",
+        minDate: "today"
+    });
+
+    // Set cookie
+    function setCookie(name, value, days) {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+        document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/;secure;SameSite=Strict`;
+    }
+
+    // Get cookie
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+    }
+
+    // Load data from cookies
+    function loadCookies() {
+        document.getElementById('businessName').value = getCookie('businessName') || '';
+        document.getElementById('contactName').value = getCookie('contactName') || '';
+        document.getElementById('contactEmail').value = getCookie('contactEmail') || '';
+        document.getElementById('contactPhone').value = getCookie('contactPhone') || '';
+    }
+
+    window.onload = loadCookies;
+
+    document.getElementById('submitQuestionnaire').addEventListener('click', () => {
+        const businessName = document.getElementById('businessName').value;
+        const contactName = document.getElementById('contactName').value;
+        const contactEmail = document.getElementById('contactEmail').value;
+        const contactPhone = document.getElementById('contactPhone').value;
+        const transportDate = document.getElementById('transportDate').value;
+        const dayTime = document.getElementById('dayTime').value;
+        const goodsType = document.getElementById('goodsType').value;
+        const goodsValue = document.getElementById('goodsValue').value;
+        const weight = document.getElementById('weight').value;
+        const volume = document.getElementById('volume').value;
+        const fragile = document.getElementById('fragile').value;
+        const temperatureSensitive = document.getElementById('temperatureSensitive').value;
+        const pickupLocation = document.getElementById('pickupLocation').value;
+        const deliveryLocation = document.getElementById('deliveryLocation').value;
+        const shipperName = document.getElementById('shipperName').value;
+        const shipperEmail = document.getElementById('shipperEmail').value;
+        const shipperPhone = document.getElementById('shipperPhone').value;
+        const receiverName = document.getElementById('receiverName').value;
+        const receiverEmail = document.getElementById('receiverEmail').value;
+        const receiverPhone = document.getElementById('receiverPhone').value;
+
+        if (businessName && contactName && contactEmail && contactPhone && transportDate && dayTime && goodsType && goodsValue && weight && volume && fragile && temperatureSensitive && pickupLocation && deliveryLocation && shipperName && shipperEmail && shipperPhone && receiverName && receiverEmail && receiverPhone) {
+            setCookie('businessName', businessName, 7);
+            setCookie('contactName', contactName, 7);
+            setCookie('contactEmail', contactEmail, 7);
+            setCookie('contactPhone', contactPhone, 7);
+
+            let emailBody = `Request for Last Mile Logistics Service\n\n`;
+            emailBody += `Business Name: ${businessName}\n`;
+            emailBody += `Contact Person Name: ${contactName}\n`;
+            emailBody += `Contact Email: ${contactEmail}\n`;
+            emailBody += `Contact Phone Number: ${contactPhone}\n`;
+            emailBody += `Transportation Date: ${transportDate}\n`;
+            emailBody += `Time of day: ${dayTime}\n`;
+            emailBody += `Goods type: ${goodsType}\n`;
+            emailBody += `Goods value: $${goodsValue}\n`;
+            emailBody += `Weight: ${weight} kg\n`;
+            emailBody += `Volume: ${volume} cubic feet\n`;
+            emailBody += `Fragile: ${fragile}\n`;
+            emailBody += `Temperature-sensitive: ${temperatureSensitive}\n`;
+            emailBody += `Pickup Location: ${pickupLocation}\n`;
+            emailBody += `Delivery Location: ${deliveryLocation}\n`;
+            emailBody += `Shipper Name: ${shipperName}\n`;
+            emailBody += `Shipper Email: ${shipperEmail}\n`;
+            emailBody += `Shipper Phone Number: ${shipperPhone}\n`;
+            emailBody += `Receiver Name: ${receiverName}\n`;
+            emailBody += `Receiver Email: ${receiverEmail}\n`;
+            emailBody += `Receiver Phone Number: ${receiverPhone}\n`;
+
+            const encodedBody = encodeURIComponent(emailBody);
+            const mailtoLink = `mailto:admin@cavacargo.com?subject=Request for Service&body=${encodedBody}`;
+            window.location.href = mailtoLink;
+
+            document.getElementById('result').innerText = "Opening your email client. If it doesn't open automatically, please check your pop-up blocker settings.";
+        } else {
+            document.getElementById('result').innerText = 'Please fill out all fields before submitting.';
+        }
+    });
+
+    // Clear form functionality
+    document.getElementById('clearForm').addEventListener('click', () => {
+        document.getElementById('questionnaire').reset();
+        document.cookie.split(';').forEach(c => {
+            document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/");
+        });
+    });
+    </script>
+</body>
+</html>
