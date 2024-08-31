@@ -128,7 +128,7 @@
         const binRentalLink = document.getElementById('binRentalLink');
         binRentalLink.addEventListener('click', function(event) {
             event.preventDefault(); // Prevent the default action
-            const password = prompt('Please enter the password to access Bin Rental:');
+            const password = prompt('Please enter the password for access:');
             if (password === 'facebook') { // Replace 'yourPasswordHere' with the actual password
                 window.location.href = '/service/box.html'; // Redirect to Bin Rental page
             } else {
