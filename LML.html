@@ -288,6 +288,52 @@
         const result = document.getElementById('result');
         result.textContent = "Your form has been submitted!";
     });
+
+
+document.getElementById('submitQuestionnaire').addEventListener('click', () => {
+    const shipperName = document.getElementById('shipperName').value;
+    const shipperEmail = document.getElementById('shipperEmail').value;
+    const shipperPhone = document.getElementById('shipperPhone').value;
+    const transportDate = document.getElementById('transportDate').value;
+    const dayTime = document.getElementById('dayTime').value;
+    const goodsType = document.getElementById('goodsType').value;
+    const goodsValue = document.getElementById('goodsValue').value;
+    const weight = document.getElementById('weight').value;
+    const volume = document.getElementById('volume').value;
+    const fragile = document.getElementById('fragile').value;
+    const temperatureSensitive = document.getElementById('temperatureSensitive').value;
+    const pickupLocation = document.getElementById('pickupLocation').value;
+    const receiverName = document.getElementById('receiverName').value;
+    const receiverEmail = document.getElementById('receiverEmail').value;
+    const receiverPhone = document.getElementById('receiverPhone').value;
+    const deliveryLocation = document.getElementById('deliveryLocation').value;
+
+    const subject = encodeURIComponent('Last Mile Logistics Request');
+    const body = encodeURIComponent(
+        `Shipper Name: ${shipperName}\n` +
+        `Shipper Email: ${shipperEmail}\n` +
+        `Shipper Phone: ${shipperPhone}\n` +
+        `Transportation Date: ${transportDate}\n` +
+        `Preferred Time of Day: ${dayTime}\n` +
+        `Goods Type: ${goodsType}\n` +
+        `Goods Value (CAD): ${goodsValue}\n` +
+        `Goods Weight (kg): ${weight}\n` +
+        `Goods Volume (cubic feet): ${volume}\n` +
+        `Fragile: ${fragile}\n` +
+        `Temperature-Sensitive: ${temperatureSensitive}\n` +
+        `Pickup Location: ${pickupLocation}\n` +
+        `Receiver Name: ${receiverName}\n` +
+        `Receiver Email: ${receiverEmail}\n` +
+        `Receiver Phone: ${receiverPhone}\n` +
+        `Delivery Location: ${deliveryLocation}\n`
+    );
+
+    const mailtoLink = `mailto:your-email@example.com?subject=${subject}&body=${body}`;
+
+    window.location.href = mailtoLink;
+});
+
+        
     </script>
 </body>
 </html>
