@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Quote Form</title>
+    <title>Cavacargo</title>
     <style>
         /* General body styling */
         body {
@@ -14,47 +14,22 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
             margin: 0;
+            padding: 0;
+            height: 100vh;
         }
 
-        /* Container for the form elements */
+        /* Container for content with white background */
         .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            max-width: 600px;
-            margin: auto;
-            text-align: center;
-        }
-
-        /* Label and input styles */
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
-        button {
-            grid-column: span 2;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .note {
-            grid-column: span 2;
-            font-style: italic;
-        }
-
-        .error {
-            color: red;
-            grid-column: span 2;
-            font-weight: bold;
+            background-color: #fff;
+            color: #000;
+            max-width: 800px;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1; /* Ensure container is above other elements */
+            text-align: left;
         }
 
         /* Hamburger menu styles */
@@ -71,7 +46,7 @@
         .menu div {
             width: 25px;
             height: 3px;
-            background-color: #fff; /* Changed to white for visibility */
+            background-color: #fff; /* Change to white for visibility */
             margin: 4px 0;
             transition: 0.3s;
         }
@@ -136,8 +111,46 @@
             text-align: center;
         }
 
-        p {
+        li {
             margin: 0;
+        }
+
+        /* Form and input styles */
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
+        }
+
+        button {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+
+        .note {
+            font-style: italic;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -158,19 +171,22 @@
         <a href="#contact">Contact</a>
     </div>
 
+
+<img src="logo.jpg" alt="Cavacargo Logo">
+
     <!-- Content -->
-    <h1>Cavacargo</h1>
-    <h1>xxx-xxx-xxxx</h1>
-    <h1>admin@cavacargo.com</h1>
-
-    <h2>Get a Quote for Moving Storage Box Rental</h2>
-    <ul>
-        <li><strong>Easy Moving Solutions:</strong> Simplify your move with our easy-to-use quote form.</li>
-    </ul>
-
-    <h1>Quote Form</h1>
-
     <div class="container">
+        <h1>Cavacargo</h1>
+        <h1>xxx-xxx-xxxx</h1>
+        <h1>admin@cavacargo.com</h1>
+
+        <h2>Get a Quote for Moving Storage Box Rental</h2>
+        <ul>
+            <li><strong>Easy Moving Solutions:</strong> Simplify your move with our easy-to-use quote form.</li>
+        </ul>
+
+        <h2>Quote Form</h2>
+
         <label for="apartmentSize">Apartment Size</label>
         <select id="apartmentSize">
             <option value="studio">Studio</option>
@@ -284,4 +300,45 @@
         }
 
         function calculateQuote() {
-            const numberOfBoxes = parseInt(document.getElementById('numberOfBoxes').value, 10) ||
+            const numberOfBoxes = parseInt(document.getElementById('numberOfBoxes').value, 10) || 0;
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            const days = Math.max((endDate - startDate) / (1000 * 60 * 60 * 24), minRentalDays);
+
+            const totalPrice = numberOfBoxes * ratePerDayPerBox * days;
+
+            document.getElementById('quoteResult').innerText = `Total Quote: $${totalPrice.toFixed(2)}`;
+        }
+
+        document.getElementById('sendEmail').addEventListener('click', () => {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const numberOfBoxes = document.getElementById('numberOfBoxes').value;
+            const address = document.getElementById('address').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const serviceLocation = document.getElementById('serviceLocation').value;
+            const deliveryOption = document.getElementById('deliveryOption').value;
+            const rackCount = document.getElementById('rackCount').value;
+            const apartmentSize = document.getElementById('apartmentSize').value;
+
+            const emailBody = `
+                Name: ${name}\n
+                Email: ${email}\n
+                Phone: ${phone}\n
+                Address: ${address}\n
+                Apartment Size: ${apartmentSize}\n
+                Number of Boxes: ${numberOfBoxes}\n
+                Number of Racks: ${rackCount}\n
+                Delivery Option: ${deliveryOption}\n
+                Service Location: ${serviceLocation}\n
+                Rental Start Date: ${startDate}\n
+                Rental End Date: ${endDate}\n
+            `;
+
+            document.getElementById('quoteResult').innerText = `Email body:\n\n${emailBody}`;
+        });
+    </script>
+</body>
+</html>
