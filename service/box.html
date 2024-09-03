@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,15 +7,15 @@
     <style>
         /* General body styling */
         body {
-             background-color: #000;
-        color: #fff;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
         }
 
         /* Container for the form elements */
@@ -43,6 +43,7 @@
         button {
             grid-column: span 2;
             padding: 10px;
+            cursor: pointer;
         }
 
         .note {
@@ -70,7 +71,7 @@
         .menu div {
             width: 25px;
             height: 3px;
-            background-color: #000; /* Change to white to be visible against a black background */
+            background-color: #fff; /* Changed to white for visibility */
             margin: 4px 0;
             transition: 0.3s;
         }
@@ -117,17 +118,21 @@
 
         h1 {
             font-size: 24px;
+            margin: 10px 0;
         }
 
         h2 {
             font-family: Arial, sans-serif;
             font-size: 1.5em;
+            margin: 10px 0;
         }
 
         /* Paragraph styling for list items */
         ul {
             font-family: Arial, sans-serif;
             line-height: 1.6;
+            padding: 0;
+            list-style-type: none;
             text-align: center;
         }
 
@@ -160,7 +165,7 @@
 
     <h2>Get a Quote for Moving Storage Box Rental</h2>
     <ul>
-        <p><strong>Easy Moving Solutions:</strong> Simplify your move with our easy-to-use quote form.</p>
+        <li><strong>Easy Moving Solutions:</strong> Simplify your move with our easy-to-use quote form.</li>
     </ul>
 
     <h1>Quote Form</h1>
@@ -279,133 +284,4 @@
         }
 
         function calculateQuote() {
-            const numberOfBoxes = parseInt(document.getElementById('numberOfBoxes').value, 10) || 0;
-            const rackCount = parseInt(document.getElementById('rackCount').value, 10) || 0;
-            const deliveryOption = document.getElementById('deliveryOption').value;
-            const serviceLocation = document.getElementById('serviceLocation').value;
-
-            // Calculate rental duration in days
-            const startDate = new Date(document.getElementById('startDate').value);
-            const endDate = new Date(document.getElementById('endDate').value);
-            const rentalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
-
-            let quote = 0;
-            let error = '';
-
-            // Check if rental period is valid
-            if (rentalDays < minRentalDays) {
-                error = `Rental period must be at least ${minRentalDays} days.`;
-                document.getElementById('errorResult').innerText = error;
-                document.getElementById('quoteResult').innerText = '';
-                document.getElementById('depositResult').innerText = '';
-                document.getElementById('totalDueResult').innerText = '';
-                return;
-            } else {
-                document.getElementById('errorResult').innerText = '';
-            }
-
-            // Calculate quote
-            quote += numberOfBoxes * ratePerDayPerBox * rentalDays;
-            quote += rackCount * 10 * rentalDays; // $10 per rack per day
-
-            // Add delivery cost
-            if (deliveryOption === 'delivery') {
-                quote += 30; // $30 delivery fee
-            }
-
-            // Additional cost based on service location
-            switch (serviceLocation) {
-                case 'Fairview':
-                    quote += 15;
-                    break;
-                case 'Kerrisdale':
-                    quote += 20;
-                    break;
-                case 'Kitsilano':
-                    quote += 20;
-                    break;
-                case 'Mount Pleasant':
-                    quote += 30;
-                    break;
-                case 'Shaughnessy':
-                    quote += 15;
-                    break;
-                case 'Spanish Banks':
-                    quote += 30;
-                    break;
-                case 'UBC':
-                    quote += 35;
-                    break;
-            }
-
-            // Calculate deposit and total due
-            const deposit = (numberOfBoxes * 25) + (rackCount * 100);
-            const totalDue = quote + deposit;
-
-            // Update the results on the page
-            document.getElementById('quoteResult').innerText = 'Estimated Quote: $' + quote.toFixed(2);
-            document.getElementById('depositResult').innerText = 'Deposit Amount: $' + deposit.toFixed(2);
-            document.getElementById('totalDueResult').innerText = 'Total Due Amount: $' + totalDue.toFixed(2);
-            document.getElementById('note').innerText = 'Important Notice Regarding Your Quote\n\nPlease note that the quote provided is based on the information you’ve supplied. The final cost may vary depending on additional details or changes. A detailed assessment will be conducted to confirm the final cost before proceeding.\n\nFor any questions or clarifications, please feel free to contact us.';
-        }
-
-        function setupEventListeners() {
-            document.getElementById('apartmentSize').addEventListener('change', () => {
-                updateBoxRecommendation();
-            });
-
-            document.getElementById('numberOfBoxes').addEventListener('input', calculateQuote);
-            document.getElementById('rackCount').addEventListener('change', calculateQuote);
-            document.getElementById('deliveryOption').addEventListener('change', calculateQuote);
-            document.getElementById('serviceLocation').addEventListener('change', calculateQuote);
-            document.getElementById('startDate').addEventListener('change', calculateQuote);
-            document.getElementById('endDate').addEventListener('change', calculateQuote);
-        }
-
-        // Initialize event listeners
-        setupEventListeners();
-
-        document.getElementById('sendEmail').addEventListener('click', () => {
-            const result = {
-                quote: document.getElementById('quoteResult').innerText.replace('Estimated Quote: $', ''),
-                deposit: document.getElementById('depositResult').innerText.replace('Deposit Amount: $', ''),
-                totalDue: document.getElementById('totalDueResult').innerText.replace('Total Due Amount: $', ''),
-                name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
-                address: document.getElementById('address').value,
-                startDate: document.getElementById('startDate').value,
-                endDate: document.getElementById('endDate').value,
-                numberOfBoxes: document.getElementById('numberOfBoxes').value,
-                rackCount: document.getElementById('rackCount').value,
-                deliveryOption: document.getElementById('deliveryOption').value,
-                serviceLocation: document.getElementById('serviceLocation').value
-            };
-
-            const emailSubject = encodeURIComponent('Storage Box Rental Quote Request');
-            const emailBody = encodeURIComponent(
-                `Cavacargo\n\n` +
-                `Phone: xxx-xxx-xxxx\n` +
-                `Email: admin@cavacargo.com\n\n` +
-                `Name: ${result.name}\n` +
-                `Phone Number: ${result.phone}\n` +
-                `Address: ${result.address}\n` +
-                `Rental Start Date: ${result.startDate}\n` +
-                `Rental End Date: ${result.endDate}\n` +
-                `Number of Boxes: ${result.numberOfBoxes}\n` +
-                `Number of Rolling Clothes Racks: ${result.rackCount}\n` +
-                `Delivery Option: ${result.deliveryOption}\n` +
-                `Service Location: ${result.serviceLocation}\n\n` +
-                `Estimated Quote: $${result.quote}\n` +
-                `Deposit Amount: $${result.deposit}\n` +
-                `Total Due Amount: $${result.totalDue}\n\n` +
-                `Important Notice Regarding Your Quote\n\n` +
-                `Please note that the quote provided is based on the information you’ve supplied. The final cost may vary depending on additional details or changes. A detailed assessment will be conducted to confirm the final cost before proceeding.\n\n` +
-                `For any questions or clarifications, please feel free to contact us.`
-            );
-
-            const mailtoLink = `mailto:admin@cavacargo.com?subject=${emailSubject}&body=${emailBody}`;
-            window.open(mailtoLink);
-        });
-    </script>
-</body>
-</html>
+            const numberOfBoxes = parseInt(document.getElementById('numberOfBoxes').value, 10) ||
