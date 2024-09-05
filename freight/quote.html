@@ -77,9 +77,6 @@
         .menu.active div:nth-child(3) {
             transform: rotate(45deg) translate(-5px, -6px);
         }
-       
-        
-        }
         label {
             display: block;
             margin-bottom: 5px;
@@ -118,31 +115,19 @@
             white-space: pre-wrap;
             text-align: left;
         }
-        .left-column,
-        .right-column {
-            display: flex;
-            flex-direction: column;
+        .questionnaire {
+            background-color: #fff; /* White background */
+            color: #000; /* Black text color for contrast */
+            max-width: 800px; /* Maximum width of the container */
+            margin: 10px auto; /* Center the container with margin around */
+            padding: 10px; /* Padding inside the container */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 10px 10px rgba(0.2, 0.2, 0.2, 0.2); /* Shadow effect */
+            text-align: left; /* Text alignment inside the container */
+            display: grid; /* Use CSS Grid layout */
+            grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+            gap: 20px; /* Space between columns */
         }
-       
-     
-.questionnaire {
-    background-color: #fff; /* White background */
-    color: #000; /* Black text color for contrast */
-    max-width: 800px; /* Maximum width of the container */
-    margin: 10px auto; /* Center the container with margin around */
-    padding: 10px; /* Padding inside the container */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 10px 10px rgba(0.2, 0.2, 0.2, 0.2); /* Shadow effect */
-    text-align: left; /* Text alignment inside the container */
-    display: grid; /* Use CSS Grid layout */
-    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
-    gap: 20px; /* Space between columns */
-}
-
-
-
-
-
     </style>
 </head>
 <body>
@@ -160,168 +145,193 @@
     <img src="logo.pdf" alt="Your Logo">
     <h1 style="font-size:45px"><u>Logistics Quote Form</u></h1>
 
-
-<h3 style="font-size:35px; text-align:center;text-color:000">Shipper</h3>
+    <h3 style="font-size:35px; text-align:center;text-color:000">Shipper</h3>
     <div class="questionnaire">
-                <label for="shipperName">Shipper Name:</label>
-                <input type="text" id="shipperName" required>
-       
-            
-                <label for="shipperEmail">Shipper Email:</label>
-                <input type="email" id="shipperEmail" required>
-           
-            
-            
-                <label for="shipperPhone">Shipper Phone Number:</label>
-                <input type="tel" id="shipperPhone" required>
-   
-            
-            
-                <label for="transportDate">Transportation Date:</label>
-                <input type="text" id="transportDate" required>
-            
-
-            
-                <label for="dayTime">What time of day will the transportation occur?</label>
-                <select id="dayTime" required>
-                    <option value="nopref">No Preference</option>
-                    <option value="morning">Morning (6 AM - 12 PM)</option>
-                    <option value="afternoon">Afternoon (12 PM - 6 PM)</option>
-                    <option value="evening">Evening (6 PM - 12 AM)</option>
-                    <option value="night">Night (12 AM - 6 AM)</option>
-                </select>
-          
-            
-            
-                <label for="goodsType">What type of goods are being transported?</label>
-                <input type="text" id="goodsType" required>
-          
-            
-                <label for="goodsValue">Approximate value of goods (in CAD):</label>
-                <input type="number" id="goodsValue" required>
-            
-            
-                <label for="weight">Approximate weight of goods (in kg):</label>
-                <input type="number" id="weight" required>
-
-                <label for="volume">Approximate volume of goods (in cubic feet):</label>
-                <input type="number" id="volume" required>
-
-                <label for="fragile">Are the goods fragile?</label>
-                <select id="fragile" required>
-                    <option value="">Select an option</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-
-                <label for="temperatureSensitive">Are the goods temperature-sensitive?</label>
-                <select id="temperatureSensitive" required>
-                    <option value="">Select an option</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-
-                <label for="pickupLocation">Pickup Location:</label>
-                <textarea id="pickupLocation" rows="3" required></textarea>
-
-       </div>
-       
-       
-       <h3 style="font-size:35px; text-align:center;text-color;000">Receiver</h3>
-<div class="questionnaire">
-                <label for="receiverName">Receiver Name:</label>
-                <input type="text" id="receiverName" required>
-                
-                <label for="receiverEmail">Receiver Email:</label>
-                <input type="email" id="receiverEmail" required>
-                
-                <label for="receiverPhone">Receiver Phone Number:</label>
-                <input type="tel" id="receiverPhone" required>
-
-                <label for="deliveryLocation">Delivery Location:</label>
-                <textarea id="deliveryLocation" rows="3" required></textarea>
-
-            
-            
-        </div>
+        <label for="shipperName">Shipper Name:</label>
+        <input type="text" id="shipperName" required>
         
-        <div id="result"></div>
+        <label for="shipperEmail">Shipper Email:</label>
+        <input type="email" id="shipperEmail" required>
+        
+        <label for="shipperPhone">Shipper Phone Number:</label>
+        <input type="tel" id="shipperPhone" required>
+        
+        <label for="transportDate">Transportation Date:</label>
+        <input type="text" id="transportDate" required>
+        
+        <label for="dayTime">What time of day will the transportation occur?</label>
+        <select id="dayTime" required>
+            <option value="nopref">No Preference</option>
+            <option value="morning">Morning (6 AM - 12 PM)</option>
+            <option value="afternoon">Afternoon (12 PM - 6 PM)</option>
+            <option value="evening">Evening (6 PM - 12 AM)</option>
+            <option value="night">Night (12 AM - 6 AM)</option>
+        </select>
+        
+        <label for="goodsType">What type of goods are being transported?</label>
+        <input type="text" id="goodsType" required>
+        
+        <label for="goodsValue">Approximate value of goods (in CAD):</label>
+        <input type="number" id="goodsValue" required>
+        
+        <label for="weight">Approximate weight of goods (in kg):</label>
+        <input type="number" id="weight" required>
+        
+        <label for="volume">Approximate volume of goods (in cubic feet):</label>
+        <input type="number" id="volume" required>
+        
+        <label for="fragile">Are the goods fragile?</label>
+        <select id="fragile" required>
+            <option value="">Select an option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        
+        <label for="temperatureSensitive">Are the goods temperature-sensitive?</label>
+        <select id="temperatureSensitive" required>
+            <option value="">Select an option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        
+        <label for="pickupLocation">Pickup Location:</label>
+        <textarea id="pickupLocation" rows="3" required></textarea>
+        
+        <label for="loadingDock">Is there a loading dock at the pickup location?</label>
+        <select id="loadingDock">
+            <option value="">Select an option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        
+        <label for="forklift">Is a forklift available at the pickup location?</label>
+        <select id="forklift">
+            <option value="">Select an option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        
+        <label for="pickupDetails">Additional Pickup Details:</label>
+        <textarea id="pickupDetails" rows="3"></textarea>
+    </div>
+    
+    <h3 style="font-size:35px; text-align:center;text-color;000">Receiver</h3>
+    <div class="questionnaire">
+        <label for="receiverName">Receiver Name:</label>
+        <input type="text" id="receiverName" required>
+        
+        <label for="receiverEmail">Receiver Email:</label>
+        <input type="email" id="receiverEmail" required>
+        
+        <label for="receiverPhone">Receiver Phone Number:</label>
+        <input type="tel" id="receiverPhone" required>
+        
+        <label for="deliveryLocation">Delivery Location:</label>
+        <textarea id="deliveryLocation" rows="3" required></textarea>
+        
+        <label for="loadingDockDelivery">Is there a loading dock at the delivery location?</label>
+        <select id="loadingDockDelivery">
+            <option value="">Select an option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        
+        <label for="forkliftDelivery">Is a forklift available at the delivery location?</label>
+        <select id="forkliftDelivery">
+            <option value="">Select an option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        
+        <label for="deliveryDetails">Additional Delivery Details:</label>
+        <textarea id="deliveryDetails" rows="3"></textarea>
+    </div>
+    
+    <div id="result"></div>
     <button type="button" id="submitQuestionnaire">Submit</button>
-            <button type="button" id="clearForm">Clear Form</button>
-            
+    <button type="button" id="clearForm">Clear Form</button>
 
     <script>
-    // Hamburger menu toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    
-    menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-    });
-
-    // Flatpickr initialization
-    flatpickr("#transportDate", {
-        enableTime: false,
-        dateFormat: "Y-m-d"
-    });
-
-    // Form clear function
-    document.getElementById('clearForm').addEventListener('click', () => {
-        document.getElementById('questionnaire').reset();
-    });
-    
-    // Form submit function (mockup)
-    document.getElementById('submitQuestionnaire').addEventListener('click', () => {
-        const result = document.getElementById('result');
-        result.textContent = "Your form has been submitted!";
-    });
-
-
-document.getElementById('submitQuestionnaire').addEventListener('click', () => {
-    const shipperName = document.getElementById('shipperName').value;
-    const shipperEmail = document.getElementById('shipperEmail').value;
-    const shipperPhone = document.getElementById('shipperPhone').value;
-    const transportDate = document.getElementById('transportDate').value;
-    const dayTime = document.getElementById('dayTime').value;
-    const goodsType = document.getElementById('goodsType').value;
-    const goodsValue = document.getElementById('goodsValue').value;
-    const weight = document.getElementById('weight').value;
-    const volume = document.getElementById('volume').value;
-    const fragile = document.getElementById('fragile').value;
-    const temperatureSensitive = document.getElementById('temperatureSensitive').value;
-    const pickupLocation = document.getElementById('pickupLocation').value;
-    const receiverName = document.getElementById('receiverName').value;
-    const receiverEmail = document.getElementById('receiverEmail').value;
-    const receiverPhone = document.getElementById('receiverPhone').value;
-    const deliveryLocation = document.getElementById('deliveryLocation').value;
-
-    const subject = encodeURIComponent('Last Mile Logistics Request');
-    const body = encodeURIComponent(
-        `Shipper Name: ${shipperName}\n` +
-        `Shipper Email: ${shipperEmail}\n` +
-        `Shipper Phone: ${shipperPhone}\n` +
-        `Transportation Date: ${transportDate}\n` +
-        `Preferred Time of Day: ${dayTime}\n` +
-        `Goods Type: ${goodsType}\n` +
-        `Goods Value (CAD): ${goodsValue}\n` +
-        `Goods Weight (kg): ${weight}\n` +
-        `Goods Volume (cubic feet): ${volume}\n` +
-        `Fragile: ${fragile}\n` +
-        `Temperature-Sensitive: ${temperatureSensitive}\n` +
-        `Pickup Location: ${pickupLocation}\n` +
-        `Receiver Name: ${receiverName}\n` +
-        `Receiver Email: ${receiverEmail}\n` +
-        `Receiver Phone: ${receiverPhone}\n` +
-        `Delivery Location: ${deliveryLocation}\n`
-    );
-
-    const mailtoLink = `mailto:admin@cavacargo.com?subject=${subject}&body=${body}`;
-
-    window.location.href = mailtoLink;
-});
-
+        // Hamburger menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const dropdownMenu = document.getElementById('dropdownMenu');
         
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Flatpickr initialization
+        flatpickr("#transportDate", {
+            enableTime: false,
+            dateFormat: "Y-m-d"
+        });
+
+        // Form clear function
+        document.getElementById('clearForm').addEventListener('click', () => {
+            document.querySelectorAll('.questionnaire input, .questionnaire select, .questionnaire textarea').forEach(input => input.value = '');
+        });
+        
+        // Form submit function (mockup)
+        document.getElementById('submitQuestionnaire').addEventListener('click', () => {
+            const result = document.getElementById('result');
+            result.textContent = "Your form has been submitted!";
+        });
+
+        document.getElementById('submitQuestionnaire').addEventListener('click', () => {
+            const shipperName = document.getElementById('shipperName').value;
+            const shipperEmail = document.getElementById('shipperEmail').value;
+            const shipperPhone = document.getElementById('shipperPhone').value;
+            const transportDate = document.getElementById('transportDate').value;
+            const dayTime = document.getElementById('dayTime').value;
+            const goodsType = document.getElementById('goodsType').value;
+            const goodsValue = document.getElementById('goodsValue').value;
+            const weight = document.getElementById('weight').value;
+            const volume = document.getElementById('volume').value;
+            const fragile = document.getElementById('fragile').value;
+            const temperatureSensitive = document.getElementById('temperatureSensitive').value;
+            const pickupLocation = document.getElementById('pickupLocation').value;
+            const loadingDock = document.getElementById('loadingDock').value;
+            const forklift = document.getElementById('forklift').value;
+            const pickupDetails = document.getElementById('pickupDetails').value;
+            const receiverName = document.getElementById('receiverName').value;
+            const receiverEmail = document.getElementById('receiverEmail').value;
+            const receiverPhone = document.getElementById('receiverPhone').value;
+            const deliveryLocation = document.getElementById('deliveryLocation').value;
+            const loadingDockDelivery = document.getElementById('loadingDockDelivery').value;
+            const forkliftDelivery = document.getElementById('forkliftDelivery').value;
+            const deliveryDetails = document.getElementById('deliveryDetails').value;
+
+            const subject = encodeURIComponent('Last Mile Logistics Request');
+            const body = encodeURIComponent(
+                `Shipper Name: ${shipperName}\n` +
+                `Shipper Email: ${shipperEmail}\n` +
+                `Shipper Phone: ${shipperPhone}\n` +
+                `Transportation Date: ${transportDate}\n` +
+                `Preferred Time of Day: ${dayTime}\n` +
+                `Goods Type: ${goodsType}\n` +
+                `Goods Value (CAD): ${goodsValue}\n` +
+                `Goods Weight (kg): ${weight}\n` +
+                `Goods Volume (cubic feet): ${volume}\n` +
+                `Fragile: ${fragile}\n` +
+                `Temperature-Sensitive: ${temperatureSensitive}\n` +
+                `Pickup Location: ${pickupLocation}\n` +
+                `Loading Dock (Pickup): ${loadingDock}\n` +
+                `Forklift (Pickup): ${forklift}\n` +
+                `Additional Pickup Details: ${pickupDetails}\n` +
+                `Receiver Name: ${receiverName}\n` +
+                `Receiver Email: ${receiverEmail}\n` +
+                `Receiver Phone: ${receiverPhone}\n` +
+                `Delivery Location: ${deliveryLocation}\n` +
+                `Loading Dock (Delivery): ${loadingDockDelivery}\n` +
+                `Forklift (Delivery): ${forkliftDelivery}\n` +
+                `Additional Delivery Details: ${deliveryDetails}\n`
+            );
+
+            const mailtoLink = `mailto:admin@cavacargo.com?subject=${subject}&body=${body}`;
+
+            window.location.href = mailtoLink;
+        });
     </script>
 </body>
 </html>
