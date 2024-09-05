@@ -78,8 +78,7 @@
             transform: rotate(45deg) translate(-5px, -6px);
         }
        
-        .question {
-            margin-bottom: 10px;
+        
         }
         label {
             display: block;
@@ -101,7 +100,7 @@
             box-sizing: border-box;
         }
         button {
-            background-color: #007bff;
+            background-color: #000;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -111,7 +110,7 @@
             margin: 5px;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #000;
         }
         #result {
             margin-top: 20px;
@@ -125,27 +124,24 @@
             flex-direction: column;
         }
        
-     #questionnaire {
-    max-width: 900px;
-    margin: 10px auto;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+     
+.questionnaire {
+    background-color: #fff; /* White background */
+    color: #000; /* Black text color for contrast */
+    max-width: 800px; /* Maximum width of the container */
+    margin: 10px auto; /* Center the container with margin around */
+    padding: 10px; /* Padding inside the container */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 10px 10px rgba(0.2, 0.2, 0.2, 0.2); /* Shadow effect */
+    text-align: left; /* Text alignment inside the container */
+    display: grid; /* Use CSS Grid layout */
+    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
     gap: 20px; /* Space between columns */
-    text-align: left;
 }
 
-.left-column {
-    background-color: #333; /* Dark background for the left column */
-    padding: 15px; /* Add padding for content spacing */
-    border-radius: 10px 0 0 10px; /* Rounded corners on the left side */
-}
 
-.right-column {
-    background-color: #444; /* Slightly lighter background for the right column */
-    padding: 15px; /* Add padding for content spacing */
-    border-radius: 0 10px 10px 0; /* Rounded corners on the right side */
-}
+
+
 
     </style>
 </head>
@@ -164,30 +160,28 @@
     <img src="logo.pdf" alt="Your Logo">
     <h1 style="font-size:45px"><u>Logistics Quote Form</u></h1>
 
-    <form id="questionnaire">
-        <div class="left-column">
-            <div class="question"> 
-                <h3 style="font-size:35px; text-align:center;">Shipper</h3>
+
+<h3 style="font-size:35px; text-align:center;text-color:000">Shipper</h3>
+    <div class="questionnaire">
                 <label for="shipperName">Shipper Name:</label>
                 <input type="text" id="shipperName" required>
-            </div>
+       
             
-            <div class="question">
                 <label for="shipperEmail">Shipper Email:</label>
                 <input type="email" id="shipperEmail" required>
-            </div>
+           
             
-            <div class="question">
+            
                 <label for="shipperPhone">Shipper Phone Number:</label>
                 <input type="tel" id="shipperPhone" required>
-            </div>
+   
             
-            <div class="question">
+            
                 <label for="transportDate">Transportation Date:</label>
                 <input type="text" id="transportDate" required>
-            </div>
+            
 
-            <div class="question">
+            
                 <label for="dayTime">What time of day will the transportation occur?</label>
                 <select id="dayTime" required>
                     <option value="nopref">No Preference</option>
@@ -196,55 +190,45 @@
                     <option value="evening">Evening (6 PM - 12 AM)</option>
                     <option value="night">Night (12 AM - 6 AM)</option>
                 </select>
-            </div>
+          
             
-            <div class="question">
+            
                 <label for="goodsType">What type of goods are being transported?</label>
                 <input type="text" id="goodsType" required>
-            </div>
+          
             
-            <div class="question">
                 <label for="goodsValue">Approximate value of goods (in CAD):</label>
                 <input type="number" id="goodsValue" required>
-            </div>
             
-            <div class="question">
+            
                 <label for="weight">Approximate weight of goods (in kg):</label>
                 <input type="number" id="weight" required>
-            </div>
-            
-            <div class="question">
+
                 <label for="volume">Approximate volume of goods (in cubic feet):</label>
                 <input type="number" id="volume" required>
-            </div>
-            
-            <div class="question">
+
                 <label for="fragile">Are the goods fragile?</label>
                 <select id="fragile" required>
                     <option value="">Select an option</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
-            </div>
-            
-            <div class="question">
+
                 <label for="temperatureSensitive">Are the goods temperature-sensitive?</label>
                 <select id="temperatureSensitive" required>
                     <option value="">Select an option</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
-            </div>
-            
-            <div class="question">
+
                 <label for="pickupLocation">Pickup Location:</label>
                 <textarea id="pickupLocation" rows="3" required></textarea>
-            </div>
-        </div>
 
-        <div class="right-column">
-            <div class="question">
-                <h3 style="font-size:35px; text-align:center;">Receiver</h3>
+       </div>
+       
+       
+       <h3 style="font-size:35px; text-align:center;text-color;000">Receiver</h3>
+<div class="questionnaire">
                 <label for="receiverName">Receiver Name:</label>
                 <input type="text" id="receiverName" required>
                 
@@ -253,21 +237,18 @@
                 
                 <label for="receiverPhone">Receiver Phone Number:</label>
                 <input type="tel" id="receiverPhone" required>
-            </div>
 
-            <div class="question">
                 <label for="deliveryLocation">Delivery Location:</label>
                 <textarea id="deliveryLocation" rows="3" required></textarea>
-            </div>
 
             <button type="button" id="submitQuestionnaire">Submit</button>
             <button type="button" id="clearForm">Clear Form</button>
             
-            <img src="media/logo.jpg" alt="Logo" id="logoImage">
+            
         </div>
         
         <div id="result"></div>
-    </form>
+    
 
     <script>
     // Hamburger menu toggle
