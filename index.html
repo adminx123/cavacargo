@@ -22,10 +22,13 @@
         }
 
         img {
-            max-width: 100%;
-            height: auto;
-            cursor: pointer;
-        }
+    display: block;
+    max-width: 16.67%; /* Adjusted to one-third of the original 50% */
+    height: auto;
+    margin: 0 auto; /* Centers the image horizontally */
+    cursor: pointer;
+}
+
 
         h1 {
             font-size: 48px;
@@ -97,6 +100,20 @@
         .menu.active div:nth-child(3) {
             transform: rotate(45deg) translate(-5px, -6px);
         }
+
+        .container {
+    background-color: #fff; /* White background */
+    color: #000; /* Black text color for contrast */
+    max-width: 800px; /* Maximum width of the container */
+    margin: 20px; /* Margin around the container */
+    padding: 20px; /* Padding inside the container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    text-align: left; /* Text alignment inside the container */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Stretch items to fill container */
+}
     </style>
 </head>
 <body>
@@ -115,6 +132,8 @@
 
  
     <img src="media/logo.jpg" alt="Your Logo">
+    
+    <div class="container" style="position: absolute;text-align: center;">
     <p>Offering secure storage solutions and reliable middle & last-mile delivery services tailored to meet specific needs. Trust us to manage your logistics with care and efficiency.</p>
 
 
