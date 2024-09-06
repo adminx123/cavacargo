@@ -255,36 +255,71 @@
         <label for="deliveryLocation">Delivery Location:</label>
         <textarea id="deliveryLocation" rows="3" required></textarea>
         
-        <label for="loadingDockDelivery">Is there a loading dock at the delivery location?</label>
-        <select id="loadingDockDelivery" required>
-            <option value="">Select an option</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
-        
-        <label for="forkliftDelivery">Is a forklift available at the delivery location?</label>
-        <select id="forkliftDelivery" required>
-            <option value="">Select an option</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
-        
-        <label for="deliveryDetails">Additional Delivery Details:</label>
-        <textarea id="deliveryDetails" rows="3"></textarea>
+        <label for="deliveryInstructions">Delivery Instructions:</label>
+        <textarea id="deliveryInstructions" rows="3"></textarea>
     </div>
-    
-    <button id="submitBtn">Submit</button>
-    <div id="result"></div>
+
+    <button type="button" onclick="submitForm()">Submit</button>
 
     <script>
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            this.classList.toggle('active');
-            document.getElementById('dropdownMenu').style.display =
-                document.getElementById('dropdownMenu').style.display === 'block' ? 'none' : 'block';
-        });
-
+        // Initialize flatpickr for the date input
         flatpickr("#transportDate", {
             dateFormat: "Y-m-d",
+            minDate: "today"
+        });
+
+        function submitForm() {
+            const shipperName = document.getElementById('shipperName').value;
+            const shipperEmail = document.getElementById('shipperEmail').value;
+            const shipperPhone = document.getElementById('shipperPhone').value;
+            const transportDate = document.getElementById('transportDate').value;
+            const dayTime = document.getElementById('dayTime').value;
+            const goodsType = document.getElementById('goodsType').value;
+            const goodsValue = document.getElementById('goodsValue').value;
+            const weight = document.getElementById('weight').value;
+            const volume = document.getElementById('volume').value;
+            const fragile = document.getElementById('fragile').value;
+            const temperatureSensitive = document.getElementById('temperatureSensitive').value;
+            const pickupLocation = document.getElementById('pickupLocation').value;
+            const loadingDock = document.getElementById('loadingDock').value;
+            const forklift = document.getElementById('forklift').value;
+            const pickupDetails = document.getElementById('pickupDetails').value;
+            const receiverName = document.getElementById('receiverName').value;
+            const receiverEmail = document.getElementById('receiverEmail').value;
+            const receiverPhone = document.getElementById('receiverPhone').value;
+            const deliveryLocation = document.getElementById('deliveryLocation').value;
+            const deliveryInstructions = document.getElementById('deliveryInstructions').value;
+
+            // Construct the mailto link with form data
+            const mailtoLink = `mailto:admin@cavacargo.com?subject=Logistics Request&body=\
+Shipper Name: ${shipperName}%0A\
+Shipper Email: ${shipperEmail}%0A\
+Shipper Phone Number: ${shipperPhone}%0A\
+Transportation Date: ${transportDate}%0A\
+Time of Day: ${dayTime}%0A\
+Type of Goods: ${goodsType}%0A\
+Approximate Value: ${goodsValue} CAD%0A\
+Approximate Weight: ${weight} kg%0A\
+Approximate Volume: ${volume} cubic feet%0A\
+Fragile: ${fragile}%0A\
+Temperature Sensitive: ${temperatureSensitive}%0A\
+Pickup Location: ${pickupLocation}%0A\
+Loading Dock: ${loadingDock}%0A\
+Forklift Available: ${forklift}%0A\
+Additional Pickup Details: ${pickupDetails}%0A\
+Receiver Name: ${receiverName}%0A\
+Receiver Email: ${receiverEmail}%0A\
+Receiver Phone Number: ${receiverPhone}%0A\
+Delivery Location: ${deliveryLocation}%0A\
+Delivery Instructions: ${deliveryInstructions}`;
+
+            // Open the email client
+            window.location.href = mailtoLink;
+        }
+
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('dropdownMenu').classList.toggle('dropdown');
         });
     </script>
 </body>
