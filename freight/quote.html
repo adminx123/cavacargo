@@ -187,7 +187,7 @@
         
         <label for="dayTime">What time of day will the transportation occur?</label>
         <select id="dayTime" required>
-            <option value="nopref">No Preference</option>
+            <option value="nopref">No Preference/Not Applicable</option>
             <option value="morning">Morning (6 AM - 12 PM)</option>
             <option value="afternoon">Afternoon (12 PM - 6 PM)</option>
             <option value="evening">Evening (6 PM - 12 AM)</option>
@@ -224,14 +224,14 @@
         <textarea id="pickupLocation" rows="3" required></textarea>
         
         <label for="loadingDock">Is there a loading dock at the pickup location?</label>
-        <select id="loadingDock">
+        <select id="loadingDock" required>
             <option value="">Select an option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
         </select>
         
         <label for="forklift">Is a forklift available at the pickup location?</label>
-        <select id="forklift">
+        <select id="forklift" required>
             <option value="">Select an option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -256,14 +256,14 @@
         <textarea id="deliveryLocation" rows="3" required></textarea>
         
         <label for="loadingDockDelivery">Is there a loading dock at the delivery location?</label>
-        <select id="loadingDockDelivery">
+        <select id="loadingDockDelivery" required>
             <option value="">Select an option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
         </select>
         
         <label for="forkliftDelivery">Is a forklift available at the delivery location?</label>
-        <select id="forkliftDelivery">
+        <select id="forkliftDelivery" required>
             <option value="">Select an option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
