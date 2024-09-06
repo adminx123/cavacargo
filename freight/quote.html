@@ -8,34 +8,41 @@
     <link rel="icon" type="image/x-icon" href="Logo.pdf">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 
     <style>
         body {
             background-color: #000;
             color: #fff;
-            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
             min-height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            padding: 20px;
+            box-sizing: border-box;
         }
         img {
-            max-width: 100%;
+            max-width: 120px;
             height: auto;
             margin-bottom: 20px;
         }
+        h1, h3 {
+            margin: 20px 0;
+            font-weight: 700;
+            color: #fff;
+        }
         h1 {
-            margin-top: 5px;
-            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        h3 {
+            font-size: 1.5rem;
         }
         .menu {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 20px;
+            right: 20px;
             display: flex;
             flex-direction: column;
             cursor: pointer;
@@ -45,28 +52,29 @@
             width: 25px;
             height: 3px;
             background-color: #fff;
-            margin: 4px 0;
+            margin: 5px 0;
             transition: 0.3s;
         }
         .dropdown {
             display: none;
             position: absolute;
-            top: 50px;
-            right: 10px;
-            background-color: #000;
+            top: 60px;
+            right: 20px;
+            background-color: #222;
             border-radius: 5px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
             z-index: 1;
         }
         .dropdown a {
-            color: white;
-            padding: 12px 16px;
+            color: #fff;
+            padding: 10px 15px;
             text-decoration: none;
             display: block;
             text-align: center;
+            border-bottom: 1px solid #333;
         }
         .dropdown a:hover {
-            background-color: #575757;
+            background-color: #333;
         }
         .menu.active div:nth-child(1) {
             transform: rotate(-45deg) translate(-5px, 6px);
@@ -80,6 +88,9 @@
         label {
             display: block;
             margin-bottom: 5px;
+            color: #fff;
+            text-align: left;
+            font-weight: 500;
         }
         input[type="text"],
         input[type="number"],
@@ -87,46 +98,61 @@
         input[type="tel"],
         select,
         textarea {
-            width: 100%;
-            padding: 8px;
+            width: calc(100% - 22px);
+            padding: 10px;
             margin-top: 5px;
             background-color: #333;
             color: #fff;
             border: 1px solid #444;
             border-radius: 4px;
             box-sizing: border-box;
+            font-size: 16px;
         }
         button {
             background-color: #fff;
             color: #000;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-            margin: 5px;
+            margin: 20px 0;
+            transition: background-color 0.3s, color 0.3s;
         }
         button:hover {
-            background-color: #000;
+            background-color: #f0f0f0;
+            color: #000;
         }
         #result {
             margin-top: 20px;
             font-weight: bold;
             white-space: pre-wrap;
             text-align: left;
+            color: #fff;
         }
         .questionnaire {
-            background-color: #fff; /* White background */
-            color: #000; /* Black text color for contrast */
-            max-width: 800px; /* Maximum width of the container */
-            margin: 10px auto; /* Center the container with margin around */
-            padding: 10px; /* Padding inside the container */
-            border-radius: 5px; /* Rounded corners */
-            box-shadow: 0 10px 10px rgba(0.2, 0.2, 0.2, 0.2); /* Shadow effect */
-            text-align: left; /* Text alignment inside the container */
-            display: grid; /* Use CSS Grid layout */
-            grid-template-columns: 1fr 1fr; /* Two equal-width columns */
-            gap: 20px; /* Space between columns */
+            background-color: #222;
+            color: #fff;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            text-align: left;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .questionnaire label {
+            margin-bottom: 8px;
+        }
+        .questionnaire input[type="text"],
+        .questionnaire input[type="number"],
+        .questionnaire input[type="email"],
+        .questionnaire input[type="tel"],
+        .questionnaire select,
+        .questionnaire textarea {
+            font-size: 14px;
         }
     </style>
 </head>
@@ -143,9 +169,9 @@
     </div>
 
     <img src="../media/logo.pdf" alt="Your Logo">
-    <h1 style="font-size:45px"><u>Logistics Quote Form</u></h1>
+    <h1><u>Logistics Quote Form</u></h1>
 
-    <h3 style="font-size:35px; text-align:center;text-color:000">Shipper</h3>
+    <h3>Shipper</h3>
     <div class="questionnaire">
         <label for="shipperName">Shipper Name:</label>
         <input type="text" id="shipperName" required>
@@ -215,7 +241,7 @@
         <textarea id="pickupDetails" rows="3"></textarea>
     </div>
     
-    <h3 style="font-size:35px; text-align:center;text-color;000">Receiver</h3>
+    <h3>Receiver</h3>
     <div class="questionnaire">
         <label for="receiverName">Receiver Name:</label>
         <input type="text" id="receiverName" required>
@@ -247,90 +273,18 @@
         <textarea id="deliveryDetails" rows="3"></textarea>
     </div>
     
+    <button id="submitBtn">Submit</button>
     <div id="result"></div>
-    <button type="button" id="submitQuestionnaire">Submit</button>
-    <button type="button" id="clearForm">Clear Form</button>
 
     <script>
-        // Hamburger menu toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const dropdownMenu = document.getElementById('dropdownMenu');
-        
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('dropdownMenu').style.display =
+                document.getElementById('dropdownMenu').style.display === 'block' ? 'none' : 'block';
         });
 
-        // Flatpickr initialization
         flatpickr("#transportDate", {
-            enableTime: false,
-            dateFormat: "Y-m-d"
-        });
-
-        // Form clear function
-        document.getElementById('clearForm').addEventListener('click', () => {
-            document.querySelectorAll('.questionnaire input, .questionnaire select, .questionnaire textarea').forEach(input => input.value = '');
-        });
-        
-        // Form submit function (mockup)
-        document.getElementById('submitQuestionnaire').addEventListener('click', () => {
-            const result = document.getElementById('result');
-            result.textContent = "Your form has been submitted!";
-        });
-
-        document.getElementById('submitQuestionnaire').addEventListener('click', () => {
-            const shipperName = document.getElementById('shipperName').value;
-            const shipperEmail = document.getElementById('shipperEmail').value;
-            const shipperPhone = document.getElementById('shipperPhone').value;
-            const transportDate = document.getElementById('transportDate').value;
-            const dayTime = document.getElementById('dayTime').value;
-            const goodsType = document.getElementById('goodsType').value;
-            const goodsValue = document.getElementById('goodsValue').value;
-            const weight = document.getElementById('weight').value;
-            const volume = document.getElementById('volume').value;
-            const fragile = document.getElementById('fragile').value;
-            const temperatureSensitive = document.getElementById('temperatureSensitive').value;
-            const pickupLocation = document.getElementById('pickupLocation').value;
-            const loadingDock = document.getElementById('loadingDock').value;
-            const forklift = document.getElementById('forklift').value;
-            const pickupDetails = document.getElementById('pickupDetails').value;
-            const receiverName = document.getElementById('receiverName').value;
-            const receiverEmail = document.getElementById('receiverEmail').value;
-            const receiverPhone = document.getElementById('receiverPhone').value;
-            const deliveryLocation = document.getElementById('deliveryLocation').value;
-            const loadingDockDelivery = document.getElementById('loadingDockDelivery').value;
-            const forkliftDelivery = document.getElementById('forkliftDelivery').value;
-            const deliveryDetails = document.getElementById('deliveryDetails').value;
-
-            const subject = encodeURIComponent('Last Mile Logistics Request');
-            const body = encodeURIComponent(
-                `Shipper Name: ${shipperName}\n` +
-                `Shipper Email: ${shipperEmail}\n` +
-                `Shipper Phone: ${shipperPhone}\n` +
-                `Transportation Date: ${transportDate}\n` +
-                `Preferred Time of Day: ${dayTime}\n` +
-                `Goods Type: ${goodsType}\n` +
-                `Goods Value (CAD): ${goodsValue}\n` +
-                `Goods Weight (kg): ${weight}\n` +
-                `Goods Volume (cubic feet): ${volume}\n` +
-                `Fragile: ${fragile}\n` +
-                `Temperature-Sensitive: ${temperatureSensitive}\n` +
-                `Pickup Location: ${pickupLocation}\n` +
-                `Loading Dock (Pickup): ${loadingDock}\n` +
-                `Forklift (Pickup): ${forklift}\n` +
-                `Additional Pickup Details: ${pickupDetails}\n` +
-                `Receiver Name: ${receiverName}\n` +
-                `Receiver Email: ${receiverEmail}\n` +
-                `Receiver Phone: ${receiverPhone}\n` +
-                `Delivery Location: ${deliveryLocation}\n` +
-                `Loading Dock (Delivery): ${loadingDockDelivery}\n` +
-                `Forklift (Delivery): ${forkliftDelivery}\n` +
-                `Additional Delivery Details: ${deliveryDetails}\n`
-            );
-
-            const mailtoLink = `mailto:admin@cavacargo.com?subject=${subject}&body=${body}`;
-
-            window.location.href = mailtoLink;
+            dateFormat: "Y-m-d",
         });
     </script>
 </body>
