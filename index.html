@@ -162,17 +162,32 @@
             }
         });
 
-        // Password prompt for Bin Rental link
-        const binRentalLink = document.getElementById('binRentalLink');
-        binRentalLink.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default action
-            const password = prompt('Please enter the password for access:');
-            if (password === 'facebook') { // Replace 'facebook' with the actual password
-                window.location.href = '/service/box.html'; // Redirect to Bin Rental page
-            } else {
-                alert('Incorrect password. Access denied.');
-            }
-        });
+// Password prompt for Freight Quote and Bin Rental links
+const binRentalLink = document.getElementById('binRentalLink');
+const freightQuote = document.getElementById('freightquote');
+
+function checkPassword(event, redirectUrl) {
+    event.preventDefault(); // Prevent the default action
+    const password = prompt('Please enter the password for access:');
+
+    // Check if the password is correct
+    if (password === 'facebook') { // Replace 'facebook' with the actual password
+        window.location.href = redirectUrl; // Redirect to the appropriate page
+    } else {
+        alert('Incorrect password. Access denied.'); // Inform the user of the error
+    }
+}
+
+// Add event listeners
+binRentalLink.addEventListener('click', function(event) {
+    checkPassword(event, '/service/box.html'); // Redirect to Bin Rental page
+});
+
+freightQuote.addEventListener('click', function(event) {
+    checkPassword(event, '/service/freight.html'); // Redirect to Freight Quote page
+});
+
+
     </script>
 </body>
 </html>
