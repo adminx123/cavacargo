@@ -99,42 +99,57 @@
                 <option value="no">No</option>
             </select>
 </div>
-    
+
+                 <div class = "row">
             <label for="pickupLocation">Pickup Location:</label>
             <textarea id="pickupLocation" rows="3" required></textarea>
-            
+</div>
+
+        <div class = "row">
             <label for="loadingDock">Is there a loading dock at the pickup location?</label>
             <select id="loadingDock" required>
                 <option value="">Select an option</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
-            
+</div>
+
+        <div class = "row">
             <label for="forklift">Is a forklift available at the pickup location?</label>
             <select id="forklift" required>
                 <option value="">Select an option</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
-            
+</div>
+
+            <div class = "row">
             <label for="pickupDetails">Additional Pickup Details:</label>
             <textarea id="pickupDetails" rows="3"></textarea>
-        </div>
+   </div>     
         
         <h3>Receiver</h3>
-        <div class="questionnaire">
+        <div class="row">
             <label for="receiverName">Receiver Name:</label>
             <input type="text" id="receiverName" required>
-            
+</div>
+
+        <div class = "row">
             <label for="receiverEmail">Receiver Email:</label>
             <input type="email" id="receiverEmail" required>
-            
+    </div>
+
+        <div class = "row">
             <label for="receiverPhone">Receiver Phone Number:</label>
             <input type="tel" id="receiverPhone" required>
-            
+    </div>
+
+        <div class = "row">
             <label for="deliveryLocation">Delivery Location:</label>
             <textarea id="deliveryLocation" rows="3" required></textarea>
-            
+    </div>
+
+        <div class = "row">
             <label for="deliveryInstructions">Delivery Instructions:</label>
             <textarea id="deliveryInstructions" rows="3"></textarea>
         </div>
@@ -143,7 +158,7 @@
 
     
     </div>
-
+</div>
     <script>
         // Initialize flatpickr for the date input
         flatpickr("#transportDate", {
