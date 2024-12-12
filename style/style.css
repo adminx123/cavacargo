@@ -1,0 +1,656 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+* {
+  /* margin: 0; */
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#frequency {
+  margin-top: 10px;
+}
+.checkbox-wrapper-2 .ikxBAC {
+  appearance: none;
+  background-color: #dfe1e4;
+  border-radius: 72px;
+  border-style: none;
+  flex-shrink: 0;
+  height: 20px;
+  margin: 0;
+  position: relative;
+  width: 30px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: stretch;
+  align-items: stretch;
+  padding: 30px;
+}
+
+.modal-content {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 10px;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.modal-content button {
+  align-self: flex-end;
+}
+
+@media (min-width: 800px) {
+  .modal {
+    padding: 50px;
+  }
+}
+
+.checkbox-wrapper-2 .ikxBAC::before {
+  bottom: -6px;
+  content: "";
+  left: -6px;
+  position: absolute;
+  right: -6px;
+  top: -6px;
+}
+
+.checkbox-wrapper-2 .ikxBAC,
+.checkbox-wrapper-2 .ikxBAC::after {
+  transition: all 100ms ease-out;
+}
+
+.checkbox-wrapper-2 .ikxBAC::after {
+  background-color: #fff;
+  border-radius: 50%;
+  content: "";
+  height: 14px;
+  left: 3px;
+  position: absolute;
+  top: 3px;
+  width: 14px;
+}
+
+.checkbox-wrapper-2 input[type="checkbox"] {
+  cursor: default;
+}
+
+.checkbox-wrapper-2 .ikxBAC:hover {
+  background-color: #c9cbcd;
+  transition-duration: 0s;
+}
+
+.checkbox-wrapper-2 .ikxBAC:checked {
+  background-color: #000000;
+}
+
+.checkbox-wrapper-2 .ikxBAC:checked::after {
+  background-color: #fff;
+  left: 13px;
+}
+
+.checkbox-wrapper-2 :focus:not(.focus-visible) {
+  outline: 0;
+}
+
+.checkbox-wrapper-2 .ikxBAC:checked:hover {
+  background-color: #000000;
+}
+
+input[type="number"],
+input,
+select {
+  text-align: center;
+  padding: 4px ;
+  outline: none;
+  border: solid 1px #7c7c7c;
+  background-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+}
+input[type="number"]:focus,
+input:focus {
+  border-color: #242323;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.nav-div {
+  width: 100%;
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  
+}
+
+h2 {
+  margin-top: 20px;
+}
+
+/* .nav-left {
+
+} */
+
+/* .nav-right {
+} */
+
+
+
+.nav-inner {
+  transform: scale(1.5);
+}
+
+.nav-btn {
+  font-size: 45px;
+  background-color: transparent;
+  margin: -5px 0;
+  overflow: hidden;
+
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.nav-btn span {
+
+  font-size: 40px;
+}
+
+  /* text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2); */
+
+.nav-btn:hover {
+  color: #f8f8f8;
+}
+
+.cookie-container {
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 99;
+  bottom: 25px;
+  left: 25px;
+  right: 25px;
+  max-width: 600px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  padding:  15px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.cookie-container h2 {
+  text-transform: capitalize;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  color: black;
+}
+
+.cookie-container p {
+  color: black;
+  text-align: left;
+}
+
+.cookie-container div {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.cookie-container button {
+  background-color: #000000;
+  padding: 7px 10px;
+  border: solid 2px #000000;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.row input[type = 'number'] {
+  margin-right: 15px;
+}
+
+.cookie-container button:hover {
+  /* background-color: #3078ec;
+  */
+  box-shadow: none;
+  background-color: transparent;
+  border: solid 2px #000000;
+  color: #000000;
+}
+
+.cookie-container button:active {
+  background-color: #363636;
+  border: #363636;
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .row {
+    flex-direction: row;
+    /* display: flex; */
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 10px;
+    
+  }
+
+ 
+
+  .row label {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 100%;
+  }
+
+  .row > input,
+  .row select {
+    /* color: #1863dc; */
+    /* max-width: 100%; */
+    box-sizing: border-box;
+    margin: 0;
+    width: 100%;
+  }
+}
+
+input,
+textarea,
+select {
+  font-size: 17px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select {
+  appearance: none;
+  text-align-last: center;
+}
+
+.contact-support {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  text-transform: capitalize;
+  background-color: #000;
+  width: 100%;
+  max-width: 450px;
+  padding: 12px;
+  margin-top: 20px;
+}
+
+/* Modal styles */
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #000;
+  color: #000;
+  text-align: left;
+  margin: 20px;
+}
+
+.form-row {
+  display: flex; /* Make the container a flex container */
+  align-items: center; /* Vertically center the label and select */
+  gap: 10px; /* Optional: Adds space between the label and select */
+}
+
+.row {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  margin-top: 10px;
+  /* gapx: 50px; */
+  row-gap: 10px;
+}
+
+label,
+input[type="number"],
+select {
+  flex: 1; /* Equal width for all elements */
+  /* margin-right: 10px; */
+}
+
+details div *, details * {
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #000000;
+  color: white;
+  /* padding: 10px 20px; */
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+
+/* Media Query for smaller screens (e.g., mobile) */
+@media (max-width: 768px) {
+  label,
+  input[type="number"],
+  select {
+    width: 100%; /* Set width to 100% for smaller screens */
+    margin-right: 0; /* Remove margin between elements */
+  }
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  display: none; /* Hide the tooltip */
+  visibility: hidden; /* Initially hidden */
+  width: 200px; /* Adjust width as needed */
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Adjust positioning as needed */
+  left: 50%;
+  margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.numeric-input {
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.container {
+  background-color: #fff; /* White background */
+  color: #000; /* Black text color for contrast */
+  max-width: 800px; /* Maximum width of the container */
+  margin: 0 auto; /* Center horizontally with auto margins */
+  border-radius: 0 0 5px 5px; /* Rounded corners */
+  box-shadow: 10 10px 10px rgba(0.2, 0.2, 0.2, 0.2); /* Shadow effect */
+  text-align: left; /* Text alignment inside the container */
+  display: flex;
+  padding: 0 15px;
+  padding-top: 10px;   /* Adds space at the top inside the container */
+  padding-bottom: 10px; /* Adds space at the bottom inside the container */
+  flex-direction: column;
+  align-items: stretch; /* Stretch items to fill container */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.hidden {
+  display: none;
+}
+
+.good {
+  color: green;
+}
+
+.warning {
+  color: yellow;
+}
+
+.critical {
+  color: red;
+}
+
+.payment-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 450px;
+  gap: 10px;
+  /* align-items: flex-start; */
+}
+
+
+.delete-div {
+  width: 100%;
+  margin: 0;
+  padding: 5px 2px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.delete-div button {
+  background-color: #000;
+  padding: 10px ;
+  border-radius: 0;
+  
+}
+
+.delete-div button:hover {
+  background-color: #222222;
+  
+}
+
+.delete-div button:active {
+  background-color: #000000;
+  
+}
+
+
+.payment-input {
+  padding: 10px 5px 10px 5px;
+}
+
+.pay-button {
+  margin-top: 0;
+  background-color: #000;
+  border-radius: 0;
+  padding: 12px;
+}
+
+.pay-button:disabled {
+  background-color: #333;
+}
+
+#SubregionDropdown {
+  min-width: 50px;
+}
+
+/* <span class=" tooltip" data-tooltip="This is my tooltip 2">â“˜
+<span class="tooltip-content"></span>
+</span> */
+
+/* <script src="/server/scripts/toolTip.js"></script> */
+
+/* other tooltips effects iii logo and everything except heading icons */
+.tooltip {
+  font-style: normal;
+  cursor: pointer;
+  /* font-weight: bold; */
+  /* font-size: 2rem; */
+  position: relative;
+  display: inline-block;
+  font-size: 10px;
+  
+
+}
+/* tooltip icon on headings Only */
+h1 > .tooltip, h2 > .tooltip, h3 > .tooltip {
+  font-size: 10px;
+}
+
+.tooltip-content {
+  font-weight: normal;
+  display: none;
+  position: absolute;
+  bottom: 95%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  width:max-content;
+  max-width: 300px;
+  color: #fff;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  z-index: 1000;
+  opacity: 0;
+}
+
+.tooltip.show .tooltip-content {
+  display: block;
+  opacity: 1;
+}
+
+@media (max-width: 400px) {
+  .tooltip.show .tooltip-content {
+  bottom: 80%;
+    max-width: 50vw;
+    font-size: 10px;
+  }
+}
+
+
+.tab-container {
+  display: flex;
+  justify-content: center; /* Center-align tabs */
+  gap: 5px;
+  max-width: 800px;
+  margin: 20px auto 0;
+}
+
+.tab {
+  text-decoration: none;
+  flex: 1; /* Make each tab equally spaced */
+  padding: 5px 1px;
+   /* Adjust padding as needed */
+  cursor: pointer;
+  background-color: black;
+  border: 1px solid; /* Adjust border thickness as needed */
+  border-radius: 5px 5px 0 0;
+  /* margin: 0 5px;  */
+  /* Adjust spacing between tabs */
+  color: white; /* Set the text color to white */
+  /*text-align: center; /* Center-align text within the tab */
+  box-sizing: border-box; /* Include padding and border in the width */
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: normal;
+}
+/* Style for the active tab */
+.active {
+  border: solid 1px white;
+  /* cursor:default; */
+  background-color: white;
+  color: black; /* Set the text color of the active tab to black */
+}
+
+
+   #addToHomeScreenBanner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background-color: #000;
+        color: #fff;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px;
+      }
+
+      #addToHomeScreenBanner p {
+        margin: 0;
+      }
+
+      #addToHomeScreenBanner button {
+        background-color: white;
+        color: black;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /* Hamburger menu styles */
+     .menu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 2;
+  background-color: unset;
+  border: none;
+}
+
+.menu div {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 4px 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.menu.active div:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu.active div:nth-child(2) {
+  opacity: 0;
+}
+
+.menu.active div:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+      .dropdown {
+        display: none;
+        position: absolute;
+        top: 50px;
+        right: 10px;
+        background-color: #000;
+        border-radius: 5px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .dropdown a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+      }
+
+      .dropdown a:hover {
+        background-color: #575757;
+      }
+
+     
