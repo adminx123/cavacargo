@@ -6,139 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cava Cargo</title>
     <link rel="icon" type="image/x-icon" href="logo.jpg">
-
-    <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        img {
-    display: block;
-    max-width: 16.67%; /* Adjusted to one-third of the original 50% */
-    height: auto;
-    margin: 0 auto; /* Centers the image horizontally */
-    cursor: pointer;
-}
-
-
-        h1 {
-            font-size: 48px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        p {
-            font-size: 18px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            line-height: 1.6;
-            max-width: 800px;
-        }
-
-        /* Hamburger menu styles */
-        .menu {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            z-index: 2;
-        }
-
-        .menu div {
-            width: 25px;
-            height: 3px;
-            background-color: #fff;
-            margin: 4px 0;
-            transition: 0.3s;
-        }
-
-        .dropdown {
-            display: none;
-            position: absolute;
-            top: 50px;
-            right: 10px;
-            background-color: #000;
-            border-radius: 5px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .dropdown a {
-            color: white;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: center;
-        }
-
-        .dropdown a:hover {
-            background-color: #575757;
-        }
-
-        .menu.active div:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-
-        .menu.active div:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu.active div:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
-
-        .container {
-    background-color: #fff; /* White background */
-    color: #000; /* Black text color for contrast */
-    max-width: 800px; /* Maximum width of the container */
-    margin: 20px; /* Margin around the container */
-    padding: 20px; /* Padding inside the container */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
-    text-align: left; /* Text alignment inside the container */
-    display: flex;
-    flex-direction: column;
-    align-items: stretch; /* Stretch items to fill container */
-}
-    </style>
+    <link rel="stylesheet" href="assets/style/style.css">
+    <script src="assets/js/hamburger.js"></script>
 </head>
 <body>
-    <!-- Hamburger Menu -->
-    <div class="menu" id="menuToggle">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-
-    <!-- Dropdown Menu -->
-    <div class="dropdown" id="dropdownMenu">
-        <a href="freight/quote.html" id="freightquote">Logistics Quote</a>
-       <!-- <a href="service/rentalhome.html" id="binRentalLink">Rental Link</a> -->
-        <a href="mailto:admin@cavacargo.com">Contact</a>
-
-
-        
-    </div>
-
  
-    <img src="media/logo.pdf" alt="Your Logo">
+    <img src="assets/media/logo.png" alt="Your Logo">
     
    
-    <p><i>Managing your logistical needs with care and efficiency.</i></p>
+        <p><i>Curating the best picks from Temu to save you time and deliver the highest quality products at the lowest prices.</i></p>
+
+
+   
+
+
+
+    
+    <script>
+    // Password prompt for Freight Quote and Bin Rental links
+    document.addEventListener('DOMContentLoaded', function() {
+        const binRentalLink = document.getElementById('binRentalLink');
+        const freightQuoteLink = document.getElementById('freightQuoteLink');
+
+        function checkPassword(event, redirectUrl) {
+            event.preventDefault(); // Prevent the default action
+            const password = prompt('Please enter the password for access:');
+
+            // Check if the password is correct
+            if (password === 'facebook') { // Replace 'facebook' with the actual password
+                window.location.href = redirectUrl; // Redirect to the appropriate page
+            } else {
+                alert('Incorrect password. Access denied.'); // Inform the user of the error
+            }
+        }
+
+        // Add event listeners
+        if (binRentalLink) {
+            binRentalLink.addEventListener('click', function(event) {
+                checkPassword(event, 'legal/box'); // Redirect to Bin Rental page
+            });
+        }
+
+        if (freightQuoteLink) {
+            freightQuoteLink.addEventListener('click', function(event) {
+                checkPassword(event, 'pages/freight.html'); // Redirect to Freight Quote page
+            });
+        }
+    });
+    </script>
+</body>
+</html>
 
 
    

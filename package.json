@@ -1,0 +1,22 @@
+{
+  "name": "cavacargo-store",
+  "version": "1.0.0",
+  "description": "Curated dropshipping store with Temu API and Stripe integration",
+  "main": "api/store-worker.js",
+  "scripts": {
+    "deploy": "wrangler deploy --config config/wrangler.toml",
+    "dev": "wrangler dev --config config/wrangler.toml",
+    "test": "wrangler deploy --config config/wrangler.toml --dry-run",
+    "build": "echo 'No build step required for Cloudflare Workers'",
+    "clean": "rm -rf node_modules .wrangler"
+  },
+  "dependencies": {
+    "stripe": "^14.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.45.3"
+  },
+  "keywords": ["ecommerce", "dropshipping", "stripe", "temu", "cloudflare"],
+  "author": "Cava Cargo",
+  "license": "MIT"
+}
